@@ -1,5 +1,6 @@
-import { Bell, Moon, Plus, User } from "lucide-react";
+import { Bell, Plus, User } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
+import ModeToggle from "./ModeToggle";
 
 const Navbar = () => {
 	return (
@@ -15,9 +16,7 @@ const Navbar = () => {
 				<CircularButton variant="ghost" className="h-10">
 					<Bell />
 				</CircularButton>
-				<CircularButton variant="ghost" className="h-10">
-					<Moon />
-				</CircularButton>
+				<ModeToggle />
 				<CircularButton variant="ghost" className="h-10">
 					<User />
 				</CircularButton>
