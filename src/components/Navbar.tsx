@@ -1,8 +1,12 @@
 import { Bell, Plus, User } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
 import ModeToggle from "./ModeToggle";
+import { SignInButton, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
-const Navbar = () => {
+const Navbar = async () => {
+	const user = await currentUser();
+
 	return (
 		<nav className="h-14 grid grid-cols-2 md:grid-cols-3 px-4 border-b border-border">
 			<div className="hidden md:block col-span-1"></div>
@@ -17,9 +21,17 @@ const Navbar = () => {
 					<Bell />
 				</CircularButton>
 				<ModeToggle />
-				<CircularButton variant="ghost" size="icon">
-					<User />
-				</CircularButton>
+				{user ? (
+					<div className="w-9 h-9 flex justify-center items-center">
+						<UserButton />
+					</div>
+				) : (
+					<SignInButton>
+						<CircularButton variant="ghost" size="icon">
+							<User />
+						</CircularButton>
+					</SignInButton>
+				)}
 			</div>
 		</nav>
 	);
