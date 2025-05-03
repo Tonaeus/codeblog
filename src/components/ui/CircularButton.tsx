@@ -6,22 +6,20 @@ import { buttonVariants } from "@/components/ui/button";
 
 type CircularButtonProps = {
 	children: ReactNode;
-	onClick?: () => void;
-  variant?: VariantProps<typeof buttonVariants>["variant"];
 	className?: string;
-};
+} 
+& VariantProps<typeof buttonVariants> 
+& React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const CircularButton = ({
 	children,
-	onClick,
-  variant,
 	className,
+	...props
 }: CircularButtonProps) => {
 	return (
 		<Button
-			onClick={onClick}
-      variant={variant}
-			className={`aspect-square rounded-full ${className}`}
+			{...props}
+			className={`aspect-square rounded-full ${className ?? ""}`}
 		>
 			{children}
 		</Button>

@@ -10,14 +10,14 @@ const Navbar = () => {
 				<h1 className="text-2xl font-bold">Codeblog</h1>
 			</div>
 			<div className="col-span-1 flex justify-end items-center">
-				<CircularButton variant="ghost" className="h-10">
+				<CircularButton variant="ghost" size="icon">
 					<Plus />
 				</CircularButton>
-				<CircularButton variant="ghost" className="h-10">
+				<CircularButton variant="ghost" size="icon">
 					<Bell />
 				</CircularButton>
 				<ModeToggle />
-				<CircularButton variant="ghost" className="h-10">
+				<CircularButton variant="ghost" size="icon">
 					<User />
 				</CircularButton>
 			</div>
