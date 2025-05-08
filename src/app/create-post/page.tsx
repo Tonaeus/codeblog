@@ -14,8 +14,6 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const formSchema = z.object({
 	title: z
@@ -48,7 +46,7 @@ const createPage = () => {
 	};
 
 	return (
-		<div className="">
+		<div className="flex flex-col flex-1 justify-center items-center">
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<FormField
@@ -64,7 +62,7 @@ const createPage = () => {
 							</FormItem>
 						)}
 					/>
-					<Tabs defaultValue="Edit">
+					{/* <Tabs defaultValue="Edit">
 						<TabsList className="grid w-full grid-cols-2">
 							<TabsTrigger value="Edit">Edit</TabsTrigger>
 							<TabsTrigger value="Preview">Preview</TabsTrigger>
@@ -89,7 +87,7 @@ const createPage = () => {
 							/>
 						</TabsContent>
 						<TabsContent value="Preview"></TabsContent>
-					</Tabs>
+					</Tabs> */}
 					<div className="flex justify-end">
 						<Button type="submit">Submit</Button>
 					</div>
