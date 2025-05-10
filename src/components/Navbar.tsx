@@ -1,9 +1,9 @@
-import { Bell, Plus, User } from "lucide-react";
+import { Bell, Plus } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
 import ModeToggle from "./ModeToggle";
-import { SignInButton, UserButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import Clerk from "./Clerk";
+import { currentUser } from "@clerk/nextjs/server";
 
 const Navbar = async () => {
 	const user = await currentUser();
@@ -17,26 +17,20 @@ const Navbar = async () => {
 				</Link>
 			</div>
 			<div className="col-span-1 flex justify-end items-center">
-				<CircularButton variant="ghost" size="icon">
-					<Link href="/create-post">
-						<Plus />
-					</Link>
-				</CircularButton>
-				<CircularButton variant="ghost" size="icon">
-					<Bell />
-				</CircularButton>
-				<ModeToggle />
 				{user ? (
-					<div className="w-9 h-9 flex justify-center items-center">
-						<UserButton />
-					</div>
-				) : (
-					<SignInButton>
+					<>
 						<CircularButton variant="ghost" size="icon">
-							<User />
+							<Link href="/create-post">
+								<Plus />
+							</Link>
 						</CircularButton>
-					</SignInButton>
-				)}
+						<CircularButton variant="ghost" size="icon">
+							<Bell />
+						</CircularButton>
+					</>
+				) : null}
+				<ModeToggle />
+				<Clerk />
 			</div>
 		</nav>
 	);
