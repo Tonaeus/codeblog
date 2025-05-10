@@ -37,7 +37,7 @@ import {
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const VerticalDivider = ({ className = "" }) => (
 	<div className={`mx-1 flex items-center ${className}`}>
@@ -480,7 +480,13 @@ const EditorToolbar = ({
 	);
 };
 
-const Tiptap = () => {
+type TiptapProps = {
+	value: string;
+	onChange: (value: string) => void;
+	className?: string;
+};
+
+const Tiptap = ({ value, onChange, className }: TiptapProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const lowlight = createLowlight(all);
@@ -493,21 +499,27 @@ const Tiptap = () => {
 			Underline,
 			Superscript,
 			Subscript,
-			CodeBlockLowlight.configure({
-				lowlight,
-			}),
+			CodeBlockLowlight.configure({ lowlight }),
 		],
-		content: "<p>Hello World! 🌎️</p>",
 		editorProps: {
 			attributes: {
-				class:
-					"prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert focus:outline-none w-full max-w-3xl",
+				class: `${className ?? ""} focus:outline-none`,
 			},
+		},
+		content: value,
+		onUpdate: ({ editor }) => {
+			onChange(editor.getHTML());
 		},
 	});
 
+	useEffect(() => {
+		if (editor && value !== editor.getHTML()) {
+			editor.commands.setContent(value);
+		}
+	}, [value, editor]);
+
 	return (
-		<div className="w-full max-w-3xl px-4">
+
 			<div
 				tabIndex={0}
 				className={`
@@ -515,8 +527,9 @@ const Tiptap = () => {
 				${isOpen ? "border-ring ring-ring/50 ring-[3px]" : ""}
         focus:border-ring focus:ring-ring/50 focus:ring-[3px] transition-[color,box-shadow]
         focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]
-        flex flex-col w-full rounded-md shadow-xs
+        flex flex-col rounded-md shadow-xs
         outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-none
+				overflow-hidden
       `}
 			>
 				<EditorToolbar
@@ -525,9 +538,9 @@ const Tiptap = () => {
 					setIsOpen={setIsOpen}
 					className="p-1"
 				/>
-				<EditorContent editor={editor} className="px-3 pb-1" />
+				<EditorContent editor={editor} className="px-3 pb-1 hyphens-auto" />
 			</div>
-		</div>
+
 	);
 };
 
