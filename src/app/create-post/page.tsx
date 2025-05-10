@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Tiptap from "@/components/Tiptap";
+import { useRef } from "react";
 
 const formSchema = z.object({
 	title: z
@@ -46,6 +47,8 @@ const CreatePostPage = () => {
 		console.log(values);
 	};
 
+	const tiptapRef = useRef<{ focus: () => void }>(null);
+
 	return (
 		<div className="flex flex-col flex-1 w-full items-center">
 			<div className="max-w-3xl w-full p-8 flex flex-1">
@@ -59,7 +62,7 @@ const CreatePostPage = () => {
 							name="title"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Title</FormLabel>
+									<FormLabel className="cursor-pointer">Title</FormLabel>
 									<FormControl>
 										<Input
 											placeholder=""
@@ -76,9 +79,17 @@ const CreatePostPage = () => {
 							name="body"
 							render={({ field }) => (
 								<FormItem className="flex flex-col flex-1">
-									<FormLabel>Body</FormLabel>
+									<FormLabel
+										onClick={() => {
+											tiptapRef.current?.focus();
+										}}
+										className="cursor-pointer"
+									>
+										Body
+									</FormLabel>
 									<FormControl>
 										<Tiptap
+											ref={tiptapRef}
 											value={field.value}
 											onChange={field.onChange}
 											className="prose dark:prose-invert max-w-full"

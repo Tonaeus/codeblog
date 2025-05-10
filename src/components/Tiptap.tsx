@@ -37,7 +37,7 @@ import {
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 const VerticalDivider = ({ className = "" }) => (
 	<div className={`mx-1 flex items-center ${className}`}>
@@ -499,7 +499,7 @@ type TiptapProps = {
 	className?: string;
 };
 
-const Tiptap = ({ value, onChange, className }: TiptapProps) => {
+const Tiptap = forwardRef(({ value, onChange, className }: TiptapProps, ref) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const lowlight = createLowlight(all);
@@ -531,6 +531,12 @@ const Tiptap = ({ value, onChange, className }: TiptapProps) => {
 		}
 	}, [value, editor]);
 
+	useImperativeHandle(ref, () => ({
+		focus: () => {
+			editor?.commands.focus();
+		},
+	}));
+
 	return (
 		<div
 			tabIndex={0}
@@ -554,6 +560,6 @@ const Tiptap = ({ value, onChange, className }: TiptapProps) => {
 			<EditorContent editor={editor} className="px-3 pb-1 hyphens-auto" />
 		</div>
 	);
-};
+});
 
 export default Tiptap;
