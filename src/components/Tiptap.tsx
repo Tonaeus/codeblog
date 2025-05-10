@@ -59,6 +59,19 @@ const EditorToolbar = ({
 	className,
 }: EditorToolbarProps) => {
 	const isMac = /mac/i.test(navigator.userAgent);
+	const [width, setWidth] = useState(0);
+
+	useEffect(() => {
+			const handleResize = () => setWidth(window.innerWidth);
+			window.addEventListener("resize", handleResize);
+			return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	useEffect(() => {
+		if (width >= 128 + 14 * 36 + 5 * 9) {
+			setIsOpen(false);
+		}
+	}, [width]);
 
 	if (!editor) {
 		return null;
@@ -519,28 +532,27 @@ const Tiptap = ({ value, onChange, className }: TiptapProps) => {
 	}, [value, editor]);
 
 	return (
-
-			<div
-				tabIndex={0}
-				className={`
+		<div
+			tabIndex={0}
+			className={`
         border border-input bg-transparent dark:bg-input/30
 				${isOpen ? "border-ring ring-ring/50 ring-[3px]" : ""}
         focus:border-ring focus:ring-ring/50 focus:ring-[3px] transition-[color,box-shadow]
         focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]
         flex flex-col rounded-md shadow-xs
         outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-none
-				overflow-hidden
+				overflow-hidden 
+				flex-1
       `}
-			>
-				<EditorToolbar
-					editor={editor}
-					isOpen={isOpen}
-					setIsOpen={setIsOpen}
-					className="p-1"
-				/>
-				<EditorContent editor={editor} className="px-3 pb-1 hyphens-auto" />
-			</div>
-
+		>
+			<EditorToolbar
+				editor={editor}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				className="p-1"
+			/>
+			<EditorContent editor={editor} className="px-3 pb-1 hyphens-auto" />
+		</div>
 	);
 };
 

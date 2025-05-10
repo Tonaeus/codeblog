@@ -64,7 +64,7 @@ const CreatePostPage = () => {
 										<Input
 											placeholder=""
 											{...field}
-											className="prose dark:prose-invert max-w-full"
+											className="prose dark:prose-invert max-w-full !text-base"
 										/>
 									</FormControl>
 									<FormMessage />
@@ -75,7 +75,7 @@ const CreatePostPage = () => {
 							control={form.control}
 							name="body"
 							render={({ field }) => (
-								<FormItem>
+								<FormItem className="flex flex-col flex-1">
 									<FormLabel>Body</FormLabel>
 									<FormControl>
 										<Tiptap
