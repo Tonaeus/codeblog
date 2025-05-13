@@ -4,9 +4,14 @@ import ModeToggle from "./ModeToggle";
 import Link from "next/link";
 import Clerk from "./Clerk";
 import { currentUser } from "@clerk/nextjs/server";
+import { syncUser } from "@/actions/user.action";
 
 const Navbar = async () => {
 	const user = await currentUser();
+
+	if (user) {
+    await syncUser();
+  }
 
 	return (
 		<nav className="h-14 grid grid-cols-2 md:grid-cols-3 px-8 border-b border-border">
