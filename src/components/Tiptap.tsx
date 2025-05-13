@@ -497,9 +497,11 @@ type TiptapProps = {
 	value: string;
 	onChange: (value: string) => void;
 	className?: string;
+	disabled: boolean;
+	invalid: boolean;
 };
 
-const Tiptap = forwardRef(({ value, onChange, className }: TiptapProps, ref) => {
+const Tiptap = forwardRef(({ value, onChange, className, disabled, invalid }: TiptapProps, ref) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const lowlight = createLowlight(all);
@@ -533,7 +535,9 @@ const Tiptap = forwardRef(({ value, onChange, className }: TiptapProps, ref) => 
 
 	useImperativeHandle(ref, () => ({
 		focus: () => {
-			editor?.commands.focus();
+			if (!disabled && editor) {
+        editor.commands.focus();
+      }
 		},
 	}));
 
@@ -546,9 +550,10 @@ const Tiptap = forwardRef(({ value, onChange, className }: TiptapProps, ref) => 
         focus:border-ring focus:ring-ring/50 focus:ring-[3px] transition-[color,box-shadow]
         focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]
         flex flex-col rounded-md shadow-xs
-        outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-none
+        outline-none
 				overflow-hidden 
 				flex-1
+				${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}
       `}
 		>
 			<EditorToolbar

@@ -1,10 +1,16 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 const syncUser = async () => {
   try {
+    const { userId: clerkId } = await auth();
+
+    if (!clerkId) {
+      throw new Error("Unauthorized");
+    }
+
     const user = await currentUser();
 
     if (!user) {
@@ -12,12 +18,12 @@ const syncUser = async () => {
     }
 
     if (!user.username) {
-      throw new Error("Username is missing");
+      throw new Error("Username not found");
     }
 
     const existingUser = await prisma.user.findUnique({
       where: {
-        clerkId: user.id
+        clerkId
       }
     });
 
@@ -27,7 +33,7 @@ const syncUser = async () => {
 
     await prisma.user.create({
       data: {
-        clerkId: user.id,
+        clerkId: clerkId,
         email: user.emailAddresses[0].emailAddress,
         username: user.username,
         image: user.imageUrl,
@@ -41,6 +47,30 @@ const syncUser = async () => {
   }
 }
 
-export {
-  syncUser
+const getDbUserId = async () => {
+  const { userId: clerkId } = await auth();
+
+  if (!clerkId) {
+    throw new Error("Unauthorized");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      clerkId
+    },
+    select: {
+      id: true
+    }
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  };
+
+  return user.id;
 }
+
+export {
+  syncUser,
+  getDbUserId,
+};

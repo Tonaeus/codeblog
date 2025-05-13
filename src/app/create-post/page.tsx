@@ -15,7 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Tiptap from "@/components/Tiptap";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { RedirectToSignIn, useAuth } from "@clerk/nextjs";
+import { createPost } from "@/actions/post.action";
+import router from "next/router";
 
 const formSchema = z.object({
 	title: z
@@ -35,6 +38,8 @@ const formSchema = z.object({
 });
 
 const CreatePostPage = () => {
+	const { isSignedIn } = useAuth();
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -43,11 +48,30 @@ const CreatePostPage = () => {
 		},
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values);
-	};
-
 	const tiptapRef = useRef<{ focus: () => void }>(null);
+
+	const [isPosting, setIsPosting] = useState(false);
+
+	if (!isSignedIn) {
+		return <RedirectToSignIn />
+	}
+
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		setIsPosting(true);
+		try {
+			// const response = await createPost(values.title, values.title); // POST request
+			// if (response?.success) {
+			// 	form.reset();
+			// }
+		}
+		catch (error) {
+			console.log("Failed to create post:", error);
+		}
+		finally {
+			setIsPosting(false);
+			router.push('/');
+		}
+	};
 
 	return (
 		<div className="flex flex-col flex-1 w-full items-center">
@@ -68,6 +92,7 @@ const CreatePostPage = () => {
 											placeholder=""
 											{...field}
 											className="prose dark:prose-invert max-w-full !text-base"
+											disabled={isPosting}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -93,6 +118,8 @@ const CreatePostPage = () => {
 											value={field.value}
 											onChange={field.onChange}
 											className="prose dark:prose-invert max-w-full"
+											disabled={isPosting}
+											invalid={!!form.formState.errors.body}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -100,7 +127,7 @@ const CreatePostPage = () => {
 							)}
 						/>
 						<div className="flex justify-end">
-							<Button type="submit">Submit</Button>
+							<Button type="submit">Post</Button>
 						</div>
 					</form>
 				</Form>
