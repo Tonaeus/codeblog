@@ -543,16 +543,23 @@ const Tiptap = forwardRef(({ value, onChange, className, disabled, invalid }: Ti
 
 	return (
 		<div
+			aria-invalid={invalid ? "true" : "false"}
 			tabIndex={0}
 			className={`
-        border border-input bg-transparent dark:bg-input/30
+				flex flex-col flex-1 overflow-hidden 
+
+        bg-transparent dark:bg-input/30
+
+				border border-input rounded-md shadow-xs
+
+				transition-[color,box-shadow] outline-none
+
+				aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40
+
 				${isOpen ? "border-ring ring-ring/50 ring-[3px]" : ""}
-        focus:border-ring focus:ring-ring/50 focus:ring-[3px] transition-[color,box-shadow]
+        focus:border-ring focus:ring-ring/50 focus:ring-[3px] 
         focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]
-        flex flex-col rounded-md shadow-xs
-        outline-none
-				overflow-hidden 
-				flex-1
+
 				${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}
       `}
 		>

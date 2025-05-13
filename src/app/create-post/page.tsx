@@ -18,7 +18,9 @@ import Tiptap from "@/components/Tiptap";
 import { useRef, useState } from "react";
 import { RedirectToSignIn, useAuth } from "@clerk/nextjs";
 import { createPost } from "@/actions/post.action";
-import router from "next/router";
+import { useRouter } from "next/navigation";
+import { Loader2Icon, SendIcon } from "lucide-react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
 	title: z
@@ -32,7 +34,7 @@ const formSchema = z.object({
 		.string()
 		.min(1, { message: "Body is required" })
 		.max(32768)
-		.refine((val) => val.trim().length > 0, {
+		.refine((val) => val.replace(/<[^>]*>/g, "").trim().length > 0, {
 			message: "Body is required",
 		}),
 });
@@ -51,25 +53,33 @@ const CreatePostPage = () => {
 	const tiptapRef = useRef<{ focus: () => void }>(null);
 
 	const [isPosting, setIsPosting] = useState(false);
+	const router = useRouter();
 
 	if (!isSignedIn) {
-		return <RedirectToSignIn />
+		return <RedirectToSignIn />;
 	}
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		console.log("values", values);
 		setIsPosting(true);
 		try {
-			// const response = await createPost(values.title, values.title); // POST request
-			// if (response?.success) {
-			// 	form.reset();
-			// }
-		}
-		catch (error) {
+			const response = await createPost(values.title, values.title); // POST request
+			if (response?.success) {
+				form.reset();
+				router.push('/');
+			}
+			toast.success("Your post has been shared!", {
+				position: "top-center",
+				richColors: true
+			});
+		} catch (error) {
 			console.log("Failed to create post:", error);
-		}
-		finally {
+			toast.success("Failed to share your post.", {
+				position: "top-center",
+				richColors: true
+			});
+		} finally {
 			setIsPosting(false);
-			router.push('/');
 		}
 	};
 
@@ -127,7 +137,19 @@ const CreatePostPage = () => {
 							)}
 						/>
 						<div className="flex justify-end">
-							<Button type="submit">Post</Button>
+							<Button type="submit" disabled={isPosting}>
+								{isPosting ? (
+									<>
+										<Loader2Icon className="animate-spin" />
+										Posting...
+									</>
+								) : (
+									<>
+										<SendIcon />
+										Post
+									</>
+								)}
+							</Button>
 						</div>
 					</form>
 				</Form>
