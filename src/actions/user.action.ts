@@ -44,6 +44,7 @@ const syncUser = async () => {
   }
   catch (error) {
     console.log("Error in syncUser:", error);
+    return;
   }
 }
 

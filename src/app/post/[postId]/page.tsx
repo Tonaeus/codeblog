@@ -5,7 +5,8 @@ import OpinionButton from "@/components/OpinionButton";
 import PostMetadata from "@/components/PostMetadata";
 
 const PostPage = async ({ params }: { params: { postId: string } }) => {
-	const response = await getPost(params.postId);
+	const { postId } = await params;
+	const response = await getPost(postId);
 
 	if (!response?.success) {
 		return null;
