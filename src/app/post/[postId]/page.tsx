@@ -1,0 +1,45 @@
+import { getPost } from "@/actions/post.action";
+import sanitizeHtml from "@/utils/sanitizeHtml";
+import { notFound } from "next/navigation";
+import OpinionButton from "@/components/OpinionButton";
+import PostMetadata from "@/components/PostMetadata";
+
+const PostPage = async ({ params }: { params: { postId: string } }) => {
+	const response = await getPost(params.postId);
+
+	if (!response?.success) {
+		return null;
+	}
+
+	const post = response.post;
+
+	if (!post) {
+		notFound();
+	}
+
+	return (
+		<div className="flex flex-col flex-1 w-full items-center">
+			<div
+				className="
+          max-w-3xl w-full p-8 flex flex-col flex-1 
+          whitespace-normal break-words hyphens-auto
+        "
+			>
+				<div className="prose dark:prose-invert max-w-none mb-4">
+					<h1>{post.title}</h1>
+				</div>
+				<PostMetadata post={post} />
+				<div className="my-4" />
+				<div
+					className="prose dark:prose-invert max-w-none mb-8"
+					dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.body ?? "") }}
+				/>
+				<div>
+					<OpinionButton />
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default PostPage;

@@ -60,10 +60,9 @@ const CreatePostPage = () => {
 	}
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		console.log("values", values);
 		setIsPosting(true);
 		try {
-			const response = await createPost(values.title, values.title); // POST request
+			const response = await createPost(values.title, values.body); // POST request
 			if (response?.success) {
 				form.reset();
 				router.push('/');

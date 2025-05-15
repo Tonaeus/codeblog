@@ -569,7 +569,7 @@ const Tiptap = forwardRef(({ value, onChange, className, disabled, invalid }: Ti
 				setIsOpen={setIsOpen}
 				className="p-1"
 			/>
-			<EditorContent editor={editor} className="px-3 pb-1 hyphens-auto" />
+			<EditorContent editor={editor} className="px-3 pb-1 whitespace-normal break-words hyphens-auto" />
 		</div>
 	);
 });
