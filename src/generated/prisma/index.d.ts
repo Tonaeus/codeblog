@@ -7453,8 +7453,8 @@ export namespace Prisma {
 
   export type NotificationMinAggregateOutputType = {
     id: string | null
-    userId: string | null
-    creatorId: string | null
+    recipientId: string | null
+    senderId: string | null
     type: $Enums.NotificationType | null
     read: boolean | null
     postId: string | null
@@ -7464,8 +7464,8 @@ export namespace Prisma {
 
   export type NotificationMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
-    creatorId: string | null
+    recipientId: string | null
+    senderId: string | null
     type: $Enums.NotificationType | null
     read: boolean | null
     postId: string | null
@@ -7475,8 +7475,8 @@ export namespace Prisma {
 
   export type NotificationCountAggregateOutputType = {
     id: number
-    userId: number
-    creatorId: number
+    recipientId: number
+    senderId: number
     type: number
     read: number
     postId: number
@@ -7488,8 +7488,8 @@ export namespace Prisma {
 
   export type NotificationMinAggregateInputType = {
     id?: true
-    userId?: true
-    creatorId?: true
+    recipientId?: true
+    senderId?: true
     type?: true
     read?: true
     postId?: true
@@ -7499,8 +7499,8 @@ export namespace Prisma {
 
   export type NotificationMaxAggregateInputType = {
     id?: true
-    userId?: true
-    creatorId?: true
+    recipientId?: true
+    senderId?: true
     type?: true
     read?: true
     postId?: true
@@ -7510,8 +7510,8 @@ export namespace Prisma {
 
   export type NotificationCountAggregateInputType = {
     id?: true
-    userId?: true
-    creatorId?: true
+    recipientId?: true
+    senderId?: true
     type?: true
     read?: true
     postId?: true
@@ -7594,8 +7594,8 @@ export namespace Prisma {
 
   export type NotificationGroupByOutputType = {
     id: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read: boolean
     postId: string | null
@@ -7622,8 +7622,8 @@ export namespace Prisma {
 
   export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    creatorId?: boolean
+    recipientId?: boolean
+    senderId?: boolean
     type?: boolean
     read?: boolean
     postId?: boolean
@@ -7637,8 +7637,8 @@ export namespace Prisma {
 
   export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    creatorId?: boolean
+    recipientId?: boolean
+    senderId?: boolean
     type?: boolean
     read?: boolean
     postId?: boolean
@@ -7652,8 +7652,8 @@ export namespace Prisma {
 
   export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    creatorId?: boolean
+    recipientId?: boolean
+    senderId?: boolean
     type?: boolean
     read?: boolean
     postId?: boolean
@@ -7667,8 +7667,8 @@ export namespace Prisma {
 
   export type NotificationSelectScalar = {
     id?: boolean
-    userId?: boolean
-    creatorId?: boolean
+    recipientId?: boolean
+    senderId?: boolean
     type?: boolean
     read?: boolean
     postId?: boolean
@@ -7676,7 +7676,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "creatorId" | "type" | "read" | "postId" | "commentId" | "createdAt", ExtArgs["result"]["notification"]>
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recipientId" | "senderId" | "type" | "read" | "postId" | "commentId" | "createdAt", ExtArgs["result"]["notification"]>
   export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     creator?: boolean | UserDefaultArgs<ExtArgs>
@@ -7706,8 +7706,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
-      creatorId: string
+      recipientId: string
+      senderId: string
       type: $Enums.NotificationType
       read: boolean
       postId: string | null
@@ -8141,8 +8141,8 @@ export namespace Prisma {
    */
   interface NotificationFieldRefs {
     readonly id: FieldRef<"Notification", 'String'>
-    readonly userId: FieldRef<"Notification", 'String'>
-    readonly creatorId: FieldRef<"Notification", 'String'>
+    readonly recipientId: FieldRef<"Notification", 'String'>
+    readonly senderId: FieldRef<"Notification", 'String'>
     readonly type: FieldRef<"Notification", 'NotificationType'>
     readonly read: FieldRef<"Notification", 'Boolean'>
     readonly postId: FieldRef<"Notification", 'String'>
@@ -8687,8 +8687,8 @@ export namespace Prisma {
 
   export const NotificationScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
-    creatorId: 'creatorId',
+    recipientId: 'recipientId',
+    senderId: 'senderId',
     type: 'type',
     read: 'read',
     postId: 'postId',
@@ -9218,8 +9218,8 @@ export namespace Prisma {
     OR?: NotificationWhereInput[]
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     id?: StringFilter<"Notification"> | string
-    userId?: StringFilter<"Notification"> | string
-    creatorId?: StringFilter<"Notification"> | string
+    recipientId?: StringFilter<"Notification"> | string
+    senderId?: StringFilter<"Notification"> | string
     type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
     read?: BoolFilter<"Notification"> | boolean
     postId?: StringNullableFilter<"Notification"> | string | null
@@ -9233,8 +9233,8 @@ export namespace Prisma {
 
   export type NotificationOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    creatorId?: SortOrder
+    recipientId?: SortOrder
+    senderId?: SortOrder
     type?: SortOrder
     read?: SortOrder
     postId?: SortOrderInput | SortOrder
@@ -9251,8 +9251,8 @@ export namespace Prisma {
     AND?: NotificationWhereInput | NotificationWhereInput[]
     OR?: NotificationWhereInput[]
     NOT?: NotificationWhereInput | NotificationWhereInput[]
-    userId?: StringFilter<"Notification"> | string
-    creatorId?: StringFilter<"Notification"> | string
+    recipientId?: StringFilter<"Notification"> | string
+    senderId?: StringFilter<"Notification"> | string
     type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
     read?: BoolFilter<"Notification"> | boolean
     postId?: StringNullableFilter<"Notification"> | string | null
@@ -9266,8 +9266,8 @@ export namespace Prisma {
 
   export type NotificationOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    creatorId?: SortOrder
+    recipientId?: SortOrder
+    senderId?: SortOrder
     type?: SortOrder
     read?: SortOrder
     postId?: SortOrderInput | SortOrder
@@ -9283,8 +9283,8 @@ export namespace Prisma {
     OR?: NotificationScalarWhereWithAggregatesInput[]
     NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Notification"> | string
-    userId?: StringWithAggregatesFilter<"Notification"> | string
-    creatorId?: StringWithAggregatesFilter<"Notification"> | string
+    recipientId?: StringWithAggregatesFilter<"Notification"> | string
+    senderId?: StringWithAggregatesFilter<"Notification"> | string
     type?: EnumNotificationTypeWithAggregatesFilter<"Notification"> | $Enums.NotificationType
     read?: BoolWithAggregatesFilter<"Notification"> | boolean
     postId?: StringNullableWithAggregatesFilter<"Notification"> | string | null
@@ -9737,8 +9737,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedCreateInput = {
     id?: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -9759,8 +9759,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9770,8 +9770,8 @@ export namespace Prisma {
 
   export type NotificationCreateManyInput = {
     id?: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -9788,8 +9788,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10203,8 +10203,8 @@ export namespace Prisma {
 
   export type NotificationCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    creatorId?: SortOrder
+    recipientId?: SortOrder
+    senderId?: SortOrder
     type?: SortOrder
     read?: SortOrder
     postId?: SortOrder
@@ -10214,8 +10214,8 @@ export namespace Prisma {
 
   export type NotificationMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    creatorId?: SortOrder
+    recipientId?: SortOrder
+    senderId?: SortOrder
     type?: SortOrder
     read?: SortOrder
     postId?: SortOrder
@@ -10225,8 +10225,8 @@ export namespace Prisma {
 
   export type NotificationMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    creatorId?: SortOrder
+    recipientId?: SortOrder
+    senderId?: SortOrder
     type?: SortOrder
     read?: SortOrder
     postId?: SortOrder
@@ -11264,7 +11264,7 @@ export namespace Prisma {
 
   export type NotificationUncheckedCreateWithoutUserInput = {
     id?: string
-    creatorId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -11294,7 +11294,7 @@ export namespace Prisma {
 
   export type NotificationUncheckedCreateWithoutCreatorInput = {
     id?: string
-    userId: string
+    recipientId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -11461,8 +11461,8 @@ export namespace Prisma {
     OR?: NotificationScalarWhereInput[]
     NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
     id?: StringFilter<"Notification"> | string
-    userId?: StringFilter<"Notification"> | string
-    creatorId?: StringFilter<"Notification"> | string
+    recipientId?: StringFilter<"Notification"> | string
+    senderId?: StringFilter<"Notification"> | string
     type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
     read?: BoolFilter<"Notification"> | boolean
     postId?: StringNullableFilter<"Notification"> | string | null
@@ -11615,8 +11615,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedCreateWithoutPostInput = {
     id?: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     commentId?: string | null
@@ -11870,8 +11870,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedCreateWithoutCommentInput = {
     id?: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -12905,7 +12905,7 @@ export namespace Prisma {
 
   export type NotificationCreateManyUserInput = {
     id?: string
-    creatorId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -12915,7 +12915,7 @@ export namespace Prisma {
 
   export type NotificationCreateManyCreatorInput = {
     id?: string
-    userId: string
+    recipientId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -13056,7 +13056,7 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13066,7 +13066,7 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13086,7 +13086,7 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13096,7 +13096,7 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateManyWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13124,8 +13124,8 @@ export namespace Prisma {
 
   export type NotificationCreateManyPostInput = {
     id?: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     commentId?: string | null
@@ -13202,8 +13202,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13212,8 +13212,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateManyWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13231,8 +13231,8 @@ export namespace Prisma {
 
   export type NotificationCreateManyCommentInput = {
     id?: string
-    userId: string
-    creatorId: string
+    recipientId: string
+    senderId: string
     type: $Enums.NotificationType
     read?: boolean
     postId?: string | null
@@ -13278,8 +13278,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateWithoutCommentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13288,8 +13288,8 @@ export namespace Prisma {
 
   export type NotificationUncheckedUpdateManyWithoutCommentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    creatorId?: StringFieldUpdateOperationsInput | string
+    recipientId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
     type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
     read?: BoolFieldUpdateOperationsInput | boolean
     postId?: NullableStringFieldUpdateOperationsInput | string | null

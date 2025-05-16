@@ -178,8 +178,8 @@ exports.Prisma.FollowsScalarFieldEnum = {
 
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
-  creatorId: 'creatorId',
+  recipientId: 'recipientId',
+  senderId: 'senderId',
   type: 'type',
   read: 'read',
   postId: 'postId',

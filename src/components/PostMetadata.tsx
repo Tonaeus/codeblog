@@ -8,11 +8,11 @@ import { getPost } from "@/actions/post.action";
 type Post = Awaited<ReturnType<typeof getPost>>["post"];
 
 const PostMetadata = ({ post }: { post: Post }) => {
-  if (!post) {
-    return null;
-  }
+	if (!post) {
+		return null;
+	}
 
-  post.name = "John Smith"; // REMOVE THIS LINE
+	post.name = "John Smith"; // REMOVE THIS LINE
 
 	return (
 		<div className="flex flex-row justify-between">
@@ -24,9 +24,9 @@ const PostMetadata = ({ post }: { post: Post }) => {
 				</Link>
 				<span className="m-1" />
 				<div className="flex flex-col justify-center min-w-0">
-					<Link href={`/profile/${post.username}`} className="text-sm truncate leading-tight">
-						{post.name}
-					</Link>
+					<b className="text-sm truncate leading-tight">
+						<Link href={`/profile/${post.username}`}>{post.name}</Link>
+					</b>
 					<div className="text-xs truncate leading-tight">
 						{post.createdAt
 							? new Date().getTime() - new Date(post.createdAt).getTime() <
