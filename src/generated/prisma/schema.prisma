@@ -130,6 +130,8 @@ model Notification {
   post    Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
   comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
+  @@unique([type, recipientId, senderId, postId])
+  @@unique([type, recipientId, senderId, commentId])
   @@index([recipientId, createdAt])
 }
 

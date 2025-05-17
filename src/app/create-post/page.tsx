@@ -62,18 +62,24 @@ const CreatePostPage = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsPosting(true);
 		try {
-			const response = await createPost(values.title, values.body); // POST request
-			if (response?.success) {
+			const result = await createPost(values.title, values.body); // POST request
+			if (result?.success) {
 				form.reset();
 				router.push('/');
+				toast.success("Your post has been shared!", {
+					position: "top-center",
+					richColors: true
+				});
 			}
-			toast.success("Your post has been shared!", {
+			else {
+				toast.error("Failed to share your post.", {
 				position: "top-center",
 				richColors: true
 			});
+			}
 		} catch (error) {
-			console.log("Failed to create post:", error);
-			toast.success("Failed to share your post.", {
+			console.error("Failed to create post:", error);
+			toast.error("Failed to share your post.", {
 				position: "top-center",
 				richColors: true
 			});

@@ -10,10 +10,10 @@ const createPost = async (title: string, body: string) => {
     const userId = await getDbUserId();
 
     if (!userId) {
-      return;
+      return { success: false };
     };
 
-    const post = await prisma.post.create({
+    await prisma.post.create({
       data: {
         authorId: userId,
         title,
@@ -22,11 +22,11 @@ const createPost = async (title: string, body: string) => {
     });
 
     revalidatePath("/");
-    return { success: true, post };
+    return { success: true };
   }
   catch (error) {
     console.log("Error in createPost:", error);
-    return { success: false, error: "Error in createPost" };
+    return { success: false };
   }
 };
 
@@ -56,29 +56,48 @@ const getPost = async (postId: string) => {
 
     const post = {
       ...postData,
-      ...postData?.author,
-      opinion: opinionSum._sum.opinion ?? 0,
+      opinionSum: opinionSum._sum.opinion,
     };
-    delete post.author;
 
     return { success: true, post }
   }
   catch (error) {
     console.log("Error in getPost:", error);
-    return { success: false, error: "Error in getPost" };
+    return { success: false };
   }
 };
 
-const getOpinion = (postId: string) => {
-
-};
-
-const updateOpinion = async (postId: string, opinion: Opinion) => {
+const getOpinion = async (postId: string) => {
   try {
     const userId = await getDbUserId();
 
     if (!userId) {
-      return;
+      return { success: false };
+    };
+
+    const opinion = await prisma.opinion.findUnique({
+      where: {
+        userId_postId: {
+          userId,
+          postId,
+        }
+      }
+    });
+
+    return { success: true, opinion };
+  }
+  catch (error) {
+    console.log("Error in getOpinion", error);
+    return { success: false };
+  }
+};
+
+const toggleOpinion = async (postId: string, inputOpinion: Opinion) => {
+  try {
+    const userId = await getDbUserId();
+
+    if (!userId) {
+      return { success: false };
     };
 
     const existingOpinion = await prisma.opinion.findUnique({
@@ -100,8 +119,28 @@ const updateOpinion = async (postId: string, opinion: Opinion) => {
     });
 
     if (!post) {
-      throw new Error("Post not found");
+      return { success: false };
     };
+
+    const upvoteNotification = post.authorId !== userId && inputOpinion === Opinion.Positive
+      ? prisma.notification.upsert({
+        where: {
+          type_recipientId_senderId_postId: {
+            type: "UPVOTE",
+            recipientId: post.authorId,
+            senderId: userId,
+            postId,
+          },
+        },
+        create: {
+          type: "UPVOTE",
+          recipientId: post.authorId,
+          senderId: userId,
+          postId,
+        },
+        update: {},
+      })
+      : null;
 
     if (!existingOpinion) {
       await prisma.$transaction([
@@ -109,40 +148,46 @@ const updateOpinion = async (postId: string, opinion: Opinion) => {
           data: {
             userId,
             postId,
-            opinion,
-          }
+            opinion: inputOpinion
+          },
         }),
-        ...(post.authorId !== userId && opinion === Opinion.Positive
-          ? [
-              prisma.notification.create({
-                data: {
-                  type: "UPVOTE",
-                  recipientId: post.authorId,
-                  senderId: userId,
-                  postId,
-                },
-              }),
-            ]
-          : []),
+        ...(upvoteNotification ? [upvoteNotification] : []),
       ]);
     }
-    else if (opinion === existingOpinion.opinion) {
+    else if (inputOpinion === existingOpinion.opinion) {
       await prisma.opinion.delete({
         where: {
           userId_postId: {
             userId,
-            postId,
-          },
+            postId
+          }
         },
       });
     }
+    else {
+      await prisma.$transaction([
+        prisma.opinion.update({
+          where: {
+            userId_postId: {
+              userId,
+              postId
+            }
+          },
+          data: {
+            opinion: inputOpinion
+          },
+        }),
+        ...(upvoteNotification ? [upvoteNotification] : []),
+      ]);
+    }
 
-    // revalidatePath("/"); // there are 2 possible paths
+    revalidatePath("/");
+    revalidatePath(`/post/${postId}`);
     return { success: true };
   }
   catch (error) {
     console.log("Error in toggleOpinion", error);
-    return { success: false, error: "Error in toggleOpinion" };
+    return { success: false };
   }
 };
 
@@ -150,5 +195,5 @@ export {
   createPost,
   getPost,
   getOpinion,
-  updateOpinion,
+  toggleOpinion,
 };

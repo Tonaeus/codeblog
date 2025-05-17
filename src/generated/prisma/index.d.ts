@@ -9248,6 +9248,8 @@ export namespace Prisma {
 
   export type NotificationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    type_recipientId_senderId_postId?: NotificationTypeRecipientIdSenderIdPostIdCompoundUniqueInput
+    type_recipientId_senderId_commentId?: NotificationTypeRecipientIdSenderIdCommentIdCompoundUniqueInput
     AND?: NotificationWhereInput | NotificationWhereInput[]
     OR?: NotificationWhereInput[]
     NOT?: NotificationWhereInput | NotificationWhereInput[]
@@ -9262,7 +9264,7 @@ export namespace Prisma {
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostNullableScalarRelationFilter, PostWhereInput> | null
     comment?: XOR<CommentNullableScalarRelationFilter, CommentWhereInput> | null
-  }, "id">
+  }, "id" | "type_recipientId_senderId_postId" | "type_recipientId_senderId_commentId">
 
   export type NotificationOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10199,6 +10201,20 @@ export namespace Prisma {
     in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+  }
+
+  export type NotificationTypeRecipientIdSenderIdPostIdCompoundUniqueInput = {
+    type: $Enums.NotificationType
+    recipientId: string
+    senderId: string
+    postId: string
+  }
+
+  export type NotificationTypeRecipientIdSenderIdCommentIdCompoundUniqueInput = {
+    type: $Enums.NotificationType
+    recipientId: string
+    senderId: string
+    commentId: string
   }
 
   export type NotificationCountOrderByAggregateInput = {

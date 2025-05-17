@@ -115,14 +115,14 @@ model Follows {
 }
 
 model Notification {
-  id        String           @id @default(cuid())
-  recipientId    String
-  senderId String
-  type      NotificationType
-  read      Boolean          @default(false)
-  postId    String?
-  commentId String?
-  createdAt DateTime         @default(now())
+  id          String           @id @default(cuid())
+  recipientId String
+  senderId    String
+  type        NotificationType
+  read        Boolean          @default(false)
+  postId      String?
+  commentId   String?
+  createdAt   DateTime         @default(now())
 
   // Relations
   user    User     @relation("userNotifications", fields: [recipientId], references: [id], onDelete: Cascade)
@@ -130,6 +130,8 @@ model Notification {
   post    Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
   comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
+  @@unique([type, recipientId, senderId, postId])
+  @@unique([type, recipientId, senderId, commentId])
   @@index([recipientId, createdAt])
 }
 

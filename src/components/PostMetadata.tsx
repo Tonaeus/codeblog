@@ -12,20 +12,24 @@ const PostMetadata = ({ post }: { post: Post }) => {
 		return null;
 	}
 
-	post.name = "John Smith"; // REMOVE THIS LINE
+	if (post?.author) {
+		post.author.name = "John Smith"; // REMOVE THIS LINE
+	}
 
 	return (
 		<div className="flex flex-row justify-between">
 			<div className="flex flex-row items-center overflow-hidden">
-				<Link href={`/profile/${post.username}`}>
+				<Link href={`/profile/${post.author?.username}`}>
 					<Avatar>
-						<AvatarImage src={post.image ?? "/avatar.png"} />
+						<AvatarImage src={post.author?.image ?? "/avatar.png"} />
 					</Avatar>
 				</Link>
 				<span className="m-1" />
 				<div className="flex flex-col justify-center min-w-0">
 					<b className="text-sm truncate leading-tight">
-						<Link href={`/profile/${post.username}`}>{post.name}</Link>
+						<Link href={`/profile/${post.author?.username}`}>
+							{post.author?.name}
+						</Link>
 					</b>
 					<div className="text-xs truncate leading-tight">
 						{post.createdAt

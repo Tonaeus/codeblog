@@ -1,18 +1,18 @@
 import { getPost } from "@/actions/post.action";
 import sanitizeHtml from "@/utils/sanitizeHtml";
 import { notFound } from "next/navigation";
-import OpinionButton from "@/components/OpinionButton";
+import OpinionButtons from "@/components/OpinionButtons";
 import PostMetadata from "@/components/PostMetadata";
 
 const PostPage = async ({ params }: { params: { postId: string } }) => {
 	const { postId } = await params;
-	const response = await getPost(postId);
+	const result = await getPost(postId);
 
-	if (!response?.success) {
+	if (!result?.success) {
 		return null;
 	}
 
-	const post = response.post;
+	const post = result.post;
 
 	if (!post) {
 		notFound();
@@ -36,7 +36,7 @@ const PostPage = async ({ params }: { params: { postId: string } }) => {
 					dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.body ?? "") }}
 				/>
 				<div>
-					<OpinionButton />
+					<OpinionButtons post={post} />
 				</div>
 			</div>
 		</div>
