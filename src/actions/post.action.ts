@@ -154,7 +154,7 @@ const toggleOpinion = async (postId: string, inputOpinion: Opinion) => {
         ...(upvoteNotification ? [upvoteNotification] : []),
       ]);
     }
-    else if (inputOpinion === existingOpinion.opinion) {
+    else if (existingOpinion.opinion === inputOpinion) {
       await prisma.opinion.delete({
         where: {
           userId_postId: {

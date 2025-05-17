@@ -90,7 +90,7 @@ const CreatePostPage = () => {
 
 	return (
 		<div className="flex flex-col flex-1 w-full items-center">
-			<div className="max-w-3xl w-full p-8 flex flex-1">
+			<div className="max-w-3xl w-full p-4 flex flex-1">
 				<Form {...form}>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}

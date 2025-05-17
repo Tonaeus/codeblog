@@ -22,7 +22,7 @@ const PostPage = async ({ params }: { params: { postId: string } }) => {
 		<div className="flex flex-col flex-1 w-full items-center">
 			<div
 				className="
-          max-w-3xl w-full p-8 flex flex-col flex-1 
+          max-w-3xl w-full p-4 flex flex-col flex-1 
           whitespace-normal break-words hyphens-auto
         "
 			>
