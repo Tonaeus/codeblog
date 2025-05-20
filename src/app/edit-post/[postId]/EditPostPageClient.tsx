@@ -16,11 +16,12 @@ import {
 import { Input } from "@/components/ui/input";
 import Tiptap from "@/components/Tiptap";
 import { useRef, useState } from "react";
-import { RedirectToSignIn, useAuth } from "@clerk/nextjs";
-import { createPost } from "@/actions/post.action";
+import { editPost, getEditPost } from "@/actions/post.action";
 import { useRouter } from "next/navigation";
 import { Loader2Icon, SendIcon } from "lucide-react";
 import { toast } from "sonner";
+
+type Post = Awaited<ReturnType<typeof getEditPost>>["post"];
 
 const formSchema = z.object({
 	title: z
@@ -39,52 +40,45 @@ const formSchema = z.object({
 		}),
 });
 
-const CreatePostPage = () => {
-	const { isSignedIn } = useAuth();
-
+const EditPostPageClient = ({ post }: { post: Post }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			title: "",
-			body: "",
+			title: post?.title,
+			body: post?.body,
 		},
 	});
 
 	const tiptapRef = useRef<{ focus: () => void }>(null);
 
-	const [isCreating, setIsCreating] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
 	const router = useRouter();
 
-	if (!isSignedIn) {
-		return <RedirectToSignIn />;
-	}
-
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		setIsCreating(true);
+		setIsEditing(true);
 		try {
-			const result = await createPost(values.title, values.body); // POST request
+			const result = await editPost(post!.id, values.title, values.body); // POST request
 			if (result?.success) {
 				form.reset();
-				router.push('/');
-				toast.success("Your post has been created!", {
+				router.push(`/post/${post!.id}`);
+				toast.success("Your post has been edited!", {
 					position: "top-center",
-					richColors: true
+					richColors: true,
+				});
+			} else {
+				toast.error("Failed to edit your post.", {
+					position: "top-center",
+					richColors: true,
 				});
 			}
-			else {
-				toast.error("Failed to create your post.", {
-				position: "top-center",
-				richColors: true
-			});
-			}
 		} catch (error) {
-			console.error("Failed to create post:", error);
-			toast.error("Failed to create your post.", {
+			console.error("Failed to edit post", error);
+			toast.error("Failed to edit your post.", {
 				position: "top-center",
-				richColors: true
+				richColors: true,
 			});
 		} finally {
-			setIsCreating(false);
+			setIsEditing(false);
 		}
 	};
 
@@ -107,7 +101,7 @@ const CreatePostPage = () => {
 											placeholder=""
 											{...field}
 											className="prose dark:prose-invert max-w-full !text-base"
-											disabled={isCreating}
+											disabled={isEditing}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -133,7 +127,7 @@ const CreatePostPage = () => {
 											value={field.value}
 											onChange={field.onChange}
 											className="prose dark:prose-invert max-w-full"
-											disabled={isCreating}
+											disabled={isEditing}
 											invalid={!!form.formState.errors.body}
 										/>
 									</FormControl>
@@ -142,16 +136,16 @@ const CreatePostPage = () => {
 							)}
 						/>
 						<div className="flex justify-end">
-							<Button type="submit" disabled={isCreating}>
-								{isCreating ? (
+							<Button type="submit" disabled={isEditing}>
+								{isEditing ? (
 									<>
 										<Loader2Icon className="animate-spin" />
-										Creating...
+										Editing...
 									</>
 								) : (
 									<>
 										<SendIcon />
-										Create
+										Edit
 									</>
 								)}
 							</Button>
@@ -163,4 +157,4 @@ const CreatePostPage = () => {
 	);
 };
 
-export default CreatePostPage;
+export default EditPostPageClient;

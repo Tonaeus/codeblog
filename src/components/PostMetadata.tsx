@@ -44,7 +44,9 @@ const PostMetadata = ({ post }: { post: Post }) => {
 			<div className="flex flex-row">
 				<span className="m-1" />
 				<CircularButton variant="ghost" size="icon">
-					<Pencil />
+					<Link href={`/edit-post/${post.id}`}>
+						<Pencil />
+					</Link>
 				</CircularButton>
 				<CircularButton variant="ghost" size="icon">
 					<Trash />

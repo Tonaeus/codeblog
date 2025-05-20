@@ -49,7 +49,7 @@ const formatOpinionSum = (opinions: number) => {
 const OpinionButtons = ({ post }: { post: Post }) => {
 	const [optimisticOpinion, setOptimisticOpinion] = useState<Opinion>(Opinion.Neutral);
 	const [optimisticOpinionSum, setOptimisticOpinionSum] = useState(post?.opinionSum ?? 0);
-	const [loading, setLoading] = useState(false);
+	const [isloading, setIsLoading] = useState(false);
 
 	const { userId } = useAuth();
 
@@ -82,7 +82,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 			return;
 		};
 
-		if (!post?.id || loading) {
+		if (!post?.id || isloading) {
 			return;
 		}
 
@@ -91,7 +91,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 
 		const { newOpinion, opinionSumChange } = opinionStateMachine(oldOpinion, inputOpinion);
 
-		setLoading(true);
+		setIsLoading(true);
 		try {
 			setOptimisticOpinion(newOpinion);
       setOptimisticOpinionSum(oldOpinionSum + opinionSumChange);
@@ -102,7 +102,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
       setOptimisticOpinionSum(oldOpinionSum);
 		}
 		finally {
-			setLoading(false);
+			setIsLoading(false);
 		}
 	};
 
@@ -129,7 +129,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 						}
 					`}
 				onClick={() => handleOpinion(Opinion.Positive)}
-				disabled={loading}
+				disabled={isloading}
 			>
 				<ArrowBigUp
 					className={`
@@ -162,7 +162,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 						}
 				`}
 				onClick={() => handleOpinion(Opinion.Negative)}
-				disabled={loading}
+				disabled={isloading}
 			>
 				<ArrowBigDown
 					className={`

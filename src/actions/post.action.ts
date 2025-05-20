@@ -3,7 +3,6 @@
 import { Opinion } from "@/types/Opinion";
 import { prisma } from "@/lib/prisma";
 import { getDbUserId } from "./user.action";
-import { revalidatePath } from "next/cache";
 
 const createPost = async (title: string, body: string) => {
   try {
@@ -21,7 +20,6 @@ const createPost = async (title: string, body: string) => {
       }
     });
 
-    revalidatePath("/");
     return { success: true };
   }
   catch (error) {
@@ -63,6 +61,61 @@ const getPost = async (postId: string) => {
   }
   catch (error) {
     console.log("Error in getPost:", error);
+    return { success: false };
+  }
+};
+
+const editPost = async (postId: string, title: string, body: string) => {
+  try {
+    const userId = await getDbUserId();
+
+    if (!userId) {
+      return { success: false };
+    }
+
+    const existingPost = await prisma.post.findUnique({
+      where: { id: postId },
+    });
+
+    if (!existingPost || existingPost.authorId !== userId) {
+      return { success: false };
+    }
+
+    await prisma.post.update({
+      where: { id: postId },
+      data: {
+        title,
+        body,
+      },
+    });
+
+    return { success: true };
+  }
+  catch (error) {
+    console.log("Error in editPost:", error);
+    return { success: false };
+  }
+};
+
+const getEditPost = async (postId: string) => {
+  try {
+    const userId = await getDbUserId();
+
+    if (!userId) {
+      return { success: false };
+    };
+
+    const post = await prisma.post.findUnique({
+      where: {
+        authorId: userId,
+        id: postId,
+      }
+    })
+
+    return { success: true, post };
+  }
+  catch (error) {
+    console.log("Error in getEditPost", error);
     return { success: false };
   }
 };
@@ -181,8 +234,6 @@ const toggleOpinion = async (postId: string, inputOpinion: Opinion) => {
       ]);
     }
 
-    revalidatePath("/");
-    revalidatePath(`/post/${postId}`);
     return { success: true };
   }
   catch (error) {
@@ -194,6 +245,8 @@ const toggleOpinion = async (postId: string, inputOpinion: Opinion) => {
 export {
   createPost,
   getPost,
+  editPost,
+  getEditPost,
   getOpinion,
   toggleOpinion,
 };
