@@ -3,6 +3,7 @@
 import { Opinion } from "@/types/Opinion";
 import { prisma } from "@/lib/prisma";
 import { getDbUserId } from "./user.action";
+import { revalidatePath } from "next/cache";
 
 const createPost = async (title: string, body: string) => {
   try {
@@ -20,6 +21,7 @@ const createPost = async (title: string, body: string) => {
       }
     });
 
+    revalidatePath("/");
     return { success: true };
   }
   catch (error) {
@@ -51,6 +53,10 @@ const getPost = async (postId: string) => {
         },
       }),
     ]);
+
+    if (!postData) {
+      return { success: false };
+    };
 
     const post = {
       ...postData,
@@ -89,6 +95,8 @@ const editPost = async (postId: string, title: string, body: string) => {
       },
     });
 
+    revalidatePath("/");
+    revalidatePath(`/post/${postId}`);
     return { success: true };
   }
   catch (error) {
@@ -141,6 +149,39 @@ const getOpinion = async (postId: string) => {
   }
   catch (error) {
     console.log("Error in getOpinion", error);
+    return { success: false };
+  }
+};
+
+const deletePost = async (postId: string) => {
+  try {
+    const userId = await getDbUserId();
+
+    if (!userId) {
+      return { success: false };
+    }
+
+    const existingPost = await prisma.post.findUnique({
+      where: { id: postId },
+    });
+
+    if (!existingPost || existingPost.authorId !== userId) {
+      return { success: false };
+    }
+
+    await prisma.post.delete({
+      where: {
+        id: postId,
+        authorId: userId
+      }
+    });
+
+    revalidatePath("/");
+    revalidatePath(`/post/${postId}`);
+    return { success: true };
+  }
+  catch (error) {
+    console.log("Error in deletePost", error);
     return { success: false };
   }
 };
@@ -247,6 +288,7 @@ export {
   getPost,
   editPost,
   getEditPost,
+  deletePost,
   getOpinion,
   toggleOpinion,
 };

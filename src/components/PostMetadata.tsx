@@ -1,9 +1,10 @@
-import { Pencil, Trash } from "lucide-react";
+import { Pencil } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
 import Link from "next/link";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { format, formatDistanceToNowStrict } from "date-fns";
 import { getPost } from "@/actions/post.action";
+import DeletePostButton from "./DeletePostButton";
 
 type Post = Awaited<ReturnType<typeof getPost>>["post"];
 
@@ -48,9 +49,7 @@ const PostMetadata = ({ post }: { post: Post }) => {
 						<Pencil />
 					</Link>
 				</CircularButton>
-				<CircularButton variant="ghost" size="icon">
-					<Trash />
-				</CircularButton>
+				<DeletePostButton postId={post.id ?? ""}/>
 			</div>
 		</div>
 	);

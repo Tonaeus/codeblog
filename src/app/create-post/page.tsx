@@ -72,13 +72,10 @@ const CreatePostPage = () => {
 				});
 			}
 			else {
-				toast.error("Failed to create your post.", {
-				position: "top-center",
-				richColors: true
-			});
+				throw new Error();
 			}
 		} catch (error) {
-			console.error("Failed to create post:", error);
+			console.error("Failed to create post", error);
 			toast.error("Failed to create your post.", {
 				position: "top-center",
 				richColors: true
