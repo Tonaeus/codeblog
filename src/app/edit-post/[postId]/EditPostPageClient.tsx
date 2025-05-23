@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { Loader2Icon, SendIcon } from "lucide-react";
 import { toast } from "sonner";
 
-type Post = Awaited<ReturnType<typeof getEditPost>>["post"];
+type EditPost = Awaited<ReturnType<typeof getEditPost>>["post"];
 
 const formSchema = z.object({
 	title: z
@@ -40,7 +40,7 @@ const formSchema = z.object({
 		}),
 });
 
-const EditPostPageClient = ({ post }: { post: Post }) => {
+const EditPostPageClient = ({ post }: { post: EditPost }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {

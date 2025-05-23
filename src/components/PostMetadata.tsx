@@ -3,10 +3,8 @@ import CircularButton from "./ui/CircularButton";
 import Link from "next/link";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { format, formatDistanceToNowStrict } from "date-fns";
-import { getPost } from "@/actions/post.action";
 import DeletePostButton from "./DeletePostButton";
-
-type Post = Awaited<ReturnType<typeof getPost>>["post"];
+import { Post } from "@/types/Post";
 
 const PostMetadata = ({ post }: { post: Post }) => {
 	if (!post) {
@@ -28,7 +26,7 @@ const PostMetadata = ({ post }: { post: Post }) => {
 				<span className="m-1" />
 				<div className="flex flex-col justify-center min-w-0">
 					<b className="text-sm truncate leading-tight">
-						<Link href={`/profile/${post.author?.username}`}>
+						<Link href={`/profile/${post.author?.username}`} className="hover:text-primary">
 							{post.author?.name}
 						</Link>
 					</b>

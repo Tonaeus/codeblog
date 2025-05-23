@@ -6,11 +6,10 @@ import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
 import numeral from "numeral";
 import { useEffect, useState } from "react";
-import { getOpinion, getPost, toggleOpinion } from "@/actions/post.action";
+import { getOpinion, toggleOpinion } from "@/actions/post.action";
 import { useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
-
-type Post = Awaited<ReturnType<typeof getPost>>["post"];
+import { Post } from "@/types/Post";
 
 const opinionStateMachine = (oldOpinion: Opinion, inputOpinion: Opinion) => {
   if (oldOpinion === inputOpinion) {
