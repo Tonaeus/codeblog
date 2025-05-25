@@ -26,14 +26,14 @@ const formSchema = z.object({
 	title: z
 		.string()
 		.min(1, { message: "Title is required" })
-		.max(256)
+		.max(256, { message: "Title must be at most 256 characters" })
 		.refine((val) => val.trim().length > 0, {
 			message: "Title is required",
 		}),
 	body: z
 		.string()
 		.min(1, { message: "Body is required" })
-		.max(32768)
+		.max(32768, { message: "Body must be at most 32768 characters" })
 		.refine((val) => val.replace(/<[^>]*>/g, "").trim().length > 0, {
 			message: "Body is required",
 		}),
@@ -65,20 +65,19 @@ const CreatePostPage = () => {
 			const result = await createPost(values.title, values.body); // POST request
 			if (result?.success) {
 				form.reset();
-				router.push('/');
+				router.push("/");
 				toast.success("Your post has been created!", {
 					position: "top-center",
-					richColors: true
+					richColors: true,
 				});
-			}
-			else {
+			} else {
 				throw new Error();
 			}
 		} catch (error) {
 			console.error("Failed to create post", error);
 			toast.error("Failed to create your post.", {
 				position: "top-center",
-				richColors: true
+				richColors: true,
 			});
 		} finally {
 			setIsCreating(false);

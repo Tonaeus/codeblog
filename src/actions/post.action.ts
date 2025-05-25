@@ -32,41 +32,123 @@ const createPost = async (title: string, body: string) => {
 
 const getPost = async (postId: string) => {
   try {
-    const [postData, opinionSum] = await prisma.$transaction([
-      prisma.post.findUnique({
-        where: { id: postId },
-        include: {
-          author: {
-            select: {
-              id: true,
-              username: true,
-              name: true,
-              image: true,
-            },
+    const postData = await prisma.post.findUnique({
+      where: { id: postId },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            image: true,
           },
         },
-      }),
-      prisma.opinion.aggregate({
-        where: { postId },
-        _sum: {
-          opinion: true,
-        },
-      }),
-    ]);
+      },
+    });
 
-    if (!postData) {
+    const opinionData = await prisma.opinion.aggregate({
+      where: { postId },
+      _sum: {
+        opinion: true,
+      },
+    });
+
+    if (!postData || !opinionData) {
       return { success: false };
     };
 
     const post = {
       ...postData,
-      opinionSum: opinionSum._sum.opinion,
+      opinionSum: opinionData._sum.opinion,
     };
 
     return { success: true, post }
   }
   catch (error) {
-    console.log("Error in getPost:", error);
+    console.log("Error in getPost", error);
+    return { success: false };
+  }
+};
+
+const getPosts = async (limit: number = 15) => {
+  try {
+    const total = await prisma.post.count();
+
+    if (total === 0) {
+      return { success: true, posts: [] };
+    }
+
+    const newCount = Math.ceil(limit * 0.8);
+    const oldCount = limit - newCount;
+
+    const newPosts = await prisma.post.findMany({
+      take: newCount,
+      orderBy: { createdAt: 'desc' },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            image: true,
+          },
+        },
+      },
+    });
+
+    const latestIds = new Set(newPosts.map(p => p.id));
+
+    const oldPosts = await prisma.post.findMany({
+      where: {
+        id: { notIn: Array.from(latestIds) },
+      },
+      select: { id: true },
+    });
+
+    const shuffled = oldPosts.sort(() => 0.5 - Math.random());
+    const randomOldIds = shuffled.slice(0, oldCount).map(p => p.id);
+
+    const randomOldPosts = await prisma.post.findMany({
+      where: {
+        id: { in: randomOldIds },
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            image: true,
+          },
+        },
+      },
+    });
+
+    const allPosts = [...newPosts, ...randomOldPosts];
+    
+    const opinionResult = await prisma.opinion.groupBy({
+      by: ['postId'],
+      _sum: { 
+        opinion: true
+      },
+      where: {
+        postId: { 
+          in: allPosts.map(p => p.id) 
+        },
+      },
+    });
+    
+    const opinionMap = new Map(opinionResult.map(o => [o.postId, o._sum.opinion ?? 0]));
+
+    const posts = allPosts.map(p => ({
+      ...p,
+      opinionSum: opinionMap.get(p.id) ?? 0,
+    }));
+
+    return { success: true, posts };
+  } 
+  catch (error) {
+    console.error("Error in getPosts", error);
     return { success: false };
   }
 };
@@ -286,6 +368,7 @@ const toggleOpinion = async (postId: string, inputOpinion: Opinion) => {
 export {
   createPost,
   getPost,
+  getPosts,
   editPost,
   getEditPost,
   deletePost,
