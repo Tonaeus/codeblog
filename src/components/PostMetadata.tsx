@@ -1,10 +1,10 @@
 import { Pencil } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
-import Link from "next/link";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { format, formatDistanceToNowStrict } from "date-fns";
 import DeletePostButton from "./DeletePostButton";
 import { Post } from "@/types/Post";
+import LinkClient from "./LinkClient";
 
 const PostMetadata = ({ post }: { post: Post }) => {
 	if (!post) {
@@ -16,19 +16,22 @@ const PostMetadata = ({ post }: { post: Post }) => {
 	}
 
 	return (
-		<div className="flex flex-row justify-between">
+		<div className="flex flex-row justify-between w-full">
 			<div className="flex flex-row items-center overflow-hidden">
-				<Link href={`/profile/${post.author?.username}`}>
+				<LinkClient href={`/profile/${post.author?.username}`}>
 					<Avatar>
 						<AvatarImage src={post.author?.image ?? "/avatar.png"} />
 					</Avatar>
-				</Link>
+				</LinkClient>
 				<span className="m-1" />
 				<div className="flex flex-col justify-center min-w-0">
 					<b className="text-sm truncate leading-tight">
-						<Link href={`/profile/${post.author?.username}`} className="hover:text-primary">
+						<LinkClient
+							href={`/profile/${post.author?.username}`}
+							className="flex justify-start hover:text-primary"
+						>
 							{post.author?.name}
-						</Link>
+						</LinkClient>
 					</b>
 					<div className="text-xs truncate leading-tight">
 						{post.createdAt
@@ -43,11 +46,11 @@ const PostMetadata = ({ post }: { post: Post }) => {
 			<div className="flex flex-row">
 				<span className="m-1" />
 				<CircularButton variant="ghost" size="icon">
-					<Link href={`/edit-post/${post.id}`}>
+					<LinkClient href={`/edit-post/${post.id}`}>
 						<Pencil />
-					</Link>
+					</LinkClient>
 				</CircularButton>
-				<DeletePostButton postId={post.id ?? ""}/>
+				<DeletePostButton postId={post.id ?? ""} />
 			</div>
 		</div>
 	);
