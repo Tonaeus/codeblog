@@ -12,24 +12,24 @@ import { toast } from "sonner";
 import { Post } from "@/types/Post";
 
 const opinionStateMachine = (oldOpinion: Opinion, inputOpinion: Opinion) => {
-  if (oldOpinion === inputOpinion) {
-    return {
-      newOpinion: Opinion.Neutral,
-      opinionSumChange: inputOpinion === Opinion.Positive ? -1 : 1,
-    };
-  }
-  
-  if (oldOpinion === Opinion.Neutral) {
-    return {
-      newOpinion: inputOpinion,
-      opinionSumChange: inputOpinion === Opinion.Positive ? 1 : -1,
-    };
-  }
-  
-  return {
-    newOpinion: inputOpinion,
-    opinionSumChange: inputOpinion === Opinion.Positive ? 2 : -2,
-  };
+	if (oldOpinion === inputOpinion) {
+		return {
+			newOpinion: Opinion.Neutral,
+			opinionSumChange: inputOpinion === Opinion.Positive ? -1 : 1,
+		};
+	}
+
+	if (oldOpinion === Opinion.Neutral) {
+		return {
+			newOpinion: inputOpinion,
+			opinionSumChange: inputOpinion === Opinion.Positive ? 1 : -1,
+		};
+	}
+
+	return {
+		newOpinion: inputOpinion,
+		opinionSumChange: inputOpinion === Opinion.Positive ? 2 : -2,
+	};
 };
 
 const formatOpinionSum = (opinions: number) => {
@@ -46,9 +46,12 @@ const formatOpinionSum = (opinions: number) => {
 };
 
 const OpinionButtons = ({ post }: { post: Post }) => {
-	const [optimisticOpinion, setOptimisticOpinion] = useState<Opinion>(Opinion.Neutral);
-	const [optimisticOpinionSum, setOptimisticOpinionSum] = useState(post?.opinionSum ?? 0);
-	const [isloading, setIsLoading] = useState(false);
+	const [optimisticOpinion, setOptimisticOpinion] = useState<Opinion>(
+		Opinion.Neutral
+	);
+	const [optimisticOpinionSum, setOptimisticOpinionSum] = useState(
+		post?.opinionSum ?? 0
+	);
 
 	const { userId } = useAuth();
 
@@ -74,47 +77,56 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 
 	const handleOpinion = async (inputOpinion: Opinion) => {
 		if (!userId) {
-      toast.error(`You must be signed in to ${inputOpinion === Opinion.Positive ? "upvote" : "downvote"}.`, {
-        position: "top-center",
-        richColors: true,
-      });
+			toast.error(
+				`You must be signed in to ${
+					inputOpinion === Opinion.Positive ? "upvote" : "downvote"
+				}.`,
+				{
+					position: "top-center",
+					richColors: true,
+				}
+			);
 			return;
-		};
+		}
 
-		if (!post?.id || isloading) {
+		if (!post?.id) {
 			return;
 		}
 
 		const oldOpinion = optimisticOpinion;
-    const oldOpinionSum = optimisticOpinionSum;
+		const oldOpinionSum = optimisticOpinionSum;
 
-		const { newOpinion, opinionSumChange } = opinionStateMachine(oldOpinion, inputOpinion);
+		const { newOpinion, opinionSumChange } = opinionStateMachine(
+			oldOpinion,
+			inputOpinion
+		);
 
-		setIsLoading(true);
 		try {
 			setOptimisticOpinion(newOpinion);
-      setOptimisticOpinionSum(oldOpinionSum + opinionSumChange);
+			setOptimisticOpinionSum(oldOpinionSum + opinionSumChange);
 			await toggleOpinion(post.id, inputOpinion);
+		} catch {
+			setOptimisticOpinion(oldOpinion);
+			setOptimisticOpinionSum(oldOpinionSum);
 		}
-		catch {
-      setOptimisticOpinion(oldOpinion);
-      setOptimisticOpinionSum(oldOpinionSum);
-		}
-		finally {
-			setIsLoading(false);
-		}
+	};
+
+	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+		e.stopPropagation();
+		e.preventDefault();
 	};
 
 	return (
 		<div
 			className={`
-      flex flex-row w-max rounded-full justify-center items-center transition-none
+      flex flex-row w-max rounded-full justify-center items-center transition-none cursor-default
 			${
 				optimisticOpinion === Opinion.Neutral
 					? "bg-accent"
 					: "bg-primary text-primary-foreground"
 			}
     `}
+			onClick={(e) => handleClick(e)}
 		>
 			<CircularButton
 				size="icon"
@@ -128,7 +140,6 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 						}
 					`}
 				onClick={() => handleOpinion(Opinion.Positive)}
-				disabled={isloading}
 			>
 				<ArrowBigUp
 					className={`
@@ -161,7 +172,6 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 						}
 				`}
 				onClick={() => handleOpinion(Opinion.Negative)}
-				disabled={isloading}
 			>
 				<ArrowBigDown
 					className={`
