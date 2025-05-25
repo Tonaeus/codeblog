@@ -71,7 +71,31 @@ const getDbUserId = async () => {
   return user.id;
 }
 
+const getUserId = async () => {
+  const { userId: clerkId } = await auth();
+
+  if (!clerkId) {
+    return null;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      clerkId
+    },
+    select: {
+      id: true
+    }
+  });
+
+  if (!user) {
+    return null;
+  };
+
+  return user.id;
+}
+
 export {
   syncUser,
   getDbUserId,
+  getUserId,
 };

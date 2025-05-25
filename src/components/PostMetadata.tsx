@@ -5,14 +5,13 @@ import { format, formatDistanceToNowStrict } from "date-fns";
 import DeletePostButton from "./DeletePostButton";
 import { Post } from "@/types/Post";
 import LinkClient from "./LinkClient";
+import { getUserId } from "@/actions/user.action";
 
-const PostMetadata = ({ post }: { post: Post }) => {
+const PostMetadata = async ({ post }: { post: Post }) => {
+	const userId = await getUserId();
+
 	if (!post) {
 		return null;
-	}
-
-	if (post?.author) {
-		post.author.name = "John Smith"; // REMOVE THIS LINE
 	}
 
 	return (
@@ -30,7 +29,7 @@ const PostMetadata = ({ post }: { post: Post }) => {
 							href={`/profile/${post.author?.username}`}
 							className="flex justify-start hover:text-primary"
 						>
-							{post.author?.name}
+							{post.author?.name || post.author?.username}
 						</LinkClient>
 					</b>
 					<div className="text-xs truncate leading-tight">
@@ -43,15 +42,17 @@ const PostMetadata = ({ post }: { post: Post }) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-row">
-				<span className="m-1" />
-				<CircularButton variant="ghost" size="icon">
-					<LinkClient href={`/edit-post/${post.id}`}>
-						<Pencil />
-					</LinkClient>
-				</CircularButton>
-				<DeletePostButton postId={post.id ?? ""} />
-			</div>
+			{userId == post.authorId ? (
+				<div className="flex flex-row">
+					<span className="m-1" />
+					<CircularButton variant="ghost" size="icon">
+						<LinkClient href={`/edit-post/${post.id}`}>
+							<Pencil />
+						</LinkClient>
+					</CircularButton>
+					<DeletePostButton postId={post.id ?? ""} />
+				</div>
+			) : null}
 		</div>
 	);
 };
