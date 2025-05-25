@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { getDbUserId } from "./user.action";
 import { revalidatePath } from "next/cache";
 
-const createPost = async (title: string, body: string) => {
+const createPost = async (title: string, description: string, body: string) => {
   try {
     const userId = await getDbUserId();
 
@@ -17,6 +17,7 @@ const createPost = async (title: string, body: string) => {
       data: {
         authorId: userId,
         title,
+        description,
         body,
       }
     });
@@ -153,7 +154,7 @@ const getPosts = async (limit: number = 15) => {
   }
 };
 
-const editPost = async (postId: string, title: string, body: string) => {
+const editPost = async (postId: string, title: string, description: string, body: string) => {
   try {
     const userId = await getDbUserId();
 
@@ -173,6 +174,7 @@ const editPost = async (postId: string, title: string, body: string) => {
       where: { id: postId },
       data: {
         title,
+        description,
         body,
       },
     });

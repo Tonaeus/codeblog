@@ -30,6 +30,13 @@ const formSchema = z.object({
 		.refine((val) => val.trim().length > 0, {
 			message: "Title is required",
 		}),
+	description: z
+		.string()
+		.min(1, { message: "Description is required" })
+		.max(512, { message: "Description must be at most 512 characters" })
+		.refine((val) => val.trim().length > 0, {
+			message: "Description is required",
+		}),
 	body: z
 		.string()
 		.min(1, { message: "Body is required" })
@@ -46,6 +53,7 @@ const CreatePostPage = () => {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			title: "",
+			description: "",
 			body: "",
 		},
 	});
@@ -62,7 +70,7 @@ const CreatePostPage = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsCreating(true);
 		try {
-			const result = await createPost(values.title, values.body); // POST request
+			const result = await createPost(values.title, values.description, values.body); // POST request
 			if (result?.success) {
 				form.reset();
 				router.push("/");
@@ -98,6 +106,24 @@ const CreatePostPage = () => {
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel className="cursor-pointer">Title</FormLabel>
+									<FormControl>
+										<Input
+											placeholder=""
+											{...field}
+											className="prose dark:prose-invert max-w-full !text-base"
+											disabled={isCreating}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="description"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel className="cursor-pointer">Description</FormLabel>
 									<FormControl>
 										<Input
 											placeholder=""

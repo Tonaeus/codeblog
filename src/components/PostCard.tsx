@@ -1,7 +1,6 @@
 import { Post } from "@/types/Post";
 import PostMetadata from "./PostMetadata";
 import OpinionButtons from "./OpinionButtons";
-import sanitizeHtml from "@/utils/sanitizeHtml";
 
 const PostCard = async ({ post }: { post: Post }) => {
 	return (
@@ -11,11 +10,9 @@ const PostCard = async ({ post }: { post: Post }) => {
 				<div className="prose-sm dark:prose-invert whitespace-normal break-words hyphens-auto">
 					<h1 className="line-clamp-3">{post?.title}</h1>
 				</div>
-				{/* <div
-					className="prose-sm dark:prose-invert"
-					dangerouslySetInnerHTML={{ __html: sanitizeHtml(post?.body ?? "") }}
-				/> */}
-				{post?.id}
+				<div className="prose-sm dark:prose-invert whitespace-normal break-words hyphens-auto">
+					<p className="line-clamp-6">{post?.description}</p>
+				</div>
 			</div>
 			<OpinionButtons post={post} />
 		</div>
