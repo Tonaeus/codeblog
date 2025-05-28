@@ -116,74 +116,65 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 		e.preventDefault();
 	};
 
+	const containerClasses =
+		optimisticOpinion === Opinion.Neutral
+			? "bg-accent brightness-95"
+			: "bg-primary text-primary-foreground";
+
+	const buttonClasses =
+		optimisticOpinion === Opinion.Neutral
+			? "bg-accent hover:brightness-95 dark:hover:brightness-150"
+			: "hover:text-primary-foreground hover:!bg-primary hover:brightness-90";
+
+	const upvoteClasses = [
+		"transition-all",
+		optimisticOpinion === Opinion.Positive
+			? "text-primary-foreground fill-current"
+			: "",
+		optimisticOpinion === Opinion.Neutral
+			? "group-hover/button:fill-current"
+			: "",
+	]
+		.filter(Boolean)
+		.join(" ");
+
+	const downvoteClasses = [
+		"transition-all",
+		optimisticOpinion === Opinion.Negative
+			? "text-primary-foreground fill-current"
+			: "",
+		optimisticOpinion === Opinion.Neutral
+			? "group-hover/button:fill-current"
+			: "",
+	]
+		.filter(Boolean)
+		.join(" ");
+
 	return (
 		<div
-			className={`
-      flex flex-row w-max rounded-full justify-center items-center transition-none cursor-default
-			${
-				optimisticOpinion === Opinion.Neutral
-					? "bg-accent"
-					: "bg-primary text-primary-foreground"
-			}
-    `}
+			className={`flex flex-row w-max rounded-full justify-center items-center cursor-default transition-all ${containerClasses}`}
 			onClick={(e) => handleClick(e)}
 		>
 			<CircularButton
 				size="icon"
 				variant="ghost"
-				className={`
-						-mr-9 z-10 group transition-none disabled:!opacity-100
-						${
-							optimisticOpinion === Opinion.Neutral
-								? "bg-accent hover:bg-secondary/50"
-								: "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground dark:hover:bg-primary/90"
-						}
-					`}
+				className={`group/button transition-all ${buttonClasses}`}
 				onClick={() => handleOpinion(Opinion.Positive)}
 			>
-				<ArrowBigUp
-					className={`
-						transition-none
-						${optimisticOpinion === Opinion.Neutral ? "group-hover:fill-current" : ""}
-						${
-							optimisticOpinion === Opinion.Positive
-								? "text-primary-foreground fill-current"
-								: ""
-						}
-					`}
-				/>
+				<ArrowBigUp className={upvoteClasses} />
 			</CircularButton>
-			<div className={`w-[35px] h-[35px] rounded-full bg-background`} />
 
-			<span className="flex justify-center items-center mx-1">
+			<span className="flex justify-center items-center mx-1 transition-all">
 				{formatOpinionSum(optimisticOpinionSum)}
 			</span>
 
-			<div className={`w-[35px] h-[35px] rounded-full bg-background`} />
 			<CircularButton
 				size="icon"
 				variant="ghost"
-				className={`
-						-ml-9 z-10 group transition-none disabled:!opacity-100
-						${
-							optimisticOpinion === Opinion.Neutral
-								? "bg-accent hover:bg-secondary/50"
-								: "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground dark:hover:bg-primary/90"
-						}
-				`}
+				className={`group/button transition-all ${buttonClasses}`}
 				onClick={() => handleOpinion(Opinion.Negative)}
 			>
-				<ArrowBigDown
-					className={`
-						transition-none
-						${optimisticOpinion === Opinion.Neutral ? "group-hover:fill-current" : ""}
-						${
-							optimisticOpinion === Opinion.Negative
-								? "text-primary-foreground fill-current"
-								: ""
-						}
-					`}
-				/>
+				<ArrowBigDown className={downvoteClasses} />
 			</CircularButton>
 		</div>
 	);
