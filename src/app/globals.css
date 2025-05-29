@@ -56,7 +56,13 @@
   --breakpoint-tp11: calc(150px + 11 * 36px + 4 * 9px);
   --breakpoint-tp12: calc(150px + 12 * 36px + 4 * 9px);
   --breakpoint-tp13: calc(150px + 13 * 36px + 5 * 9px);
-  --breakpoint-tp14: calc(150px + 14 * 36px + 5 * 9px);   
+  --breakpoint-tp14: calc(150px + 14 * 36px + 5 * 9px);  
+
+  --color-aa-btn: var(--aa-btn);
+  --color-aa-btn-hv: var(--aa-btn-hv);
+
+  --color-op-btn-hl: var(--primary);
+  --color-op-btn-hl-hv: color-mix(in oklch, var(--primary) 90%, black 10%);
 }
 
 :root {
@@ -92,6 +98,9 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.606 0.25 292.717);
+
+  --aa-btn: color-mix(in oklch, var(--accent) 95%, black 5%);
+  --aa-btn-hv: color-mix(in oklch, var(--accent) 90%, black 10%);
 }
 
 .dark {
@@ -126,6 +135,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.541 0.281 293.009);
+
+  --aa-btn-hv: color-mix(in oklch, var(--accent) 90%, white 10%);
 }
 
 @layer base {

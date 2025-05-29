@@ -118,13 +118,13 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 
 	const containerClasses =
 		optimisticOpinion === Opinion.Neutral
-			? "bg-accent brightness-95"
-			: "bg-primary text-primary-foreground";
+			? "bg-aa-btn"
+			: "bg-op-btn-hl text-primary-foreground";
 
 	const buttonClasses =
 		optimisticOpinion === Opinion.Neutral
-			? "bg-accent hover:brightness-95 dark:hover:brightness-150"
-			: "hover:text-primary-foreground hover:!bg-primary hover:brightness-90";
+			? "bg-aa-btn hover:bg-aa-btn-hv dark:hover:bg-aa-btn-hv"
+			: "hover:text-primary-foreground hover:!bg-op-btn-hl-hv dark:hover:!bg-op-btn-hl-hv";
 
 	const upvoteClasses = [
 		"transition-all",
