@@ -57,7 +57,12 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 
 	useEffect(() => {
 		const fetchOpinion = async () => {
-			if (!userId || !post?.id) {
+			if (!post?.id) {
+				return;
+			}
+
+			if (!userId) {
+				setOptimisticOpinion(Opinion.Neutral);
 				return;
 			}
 
