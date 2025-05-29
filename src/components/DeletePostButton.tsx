@@ -6,7 +6,12 @@ import { deletePost } from "@/actions/post.action";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const DeletePostButton = ({ postId }: { postId: string }) => {
+type DeletePostButtonProps = {
+	postId: string;
+	btnClassName?: string;
+};
+
+const DeletePostButton = ({ postId, btnClassName }: DeletePostButtonProps) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 	const pathname = usePathname();
 	const router = useRouter();
@@ -51,6 +56,7 @@ const DeletePostButton = ({ postId }: { postId: string }) => {
 			handleDelete={handleDelete}
 			title="Delete Post"
 			description="Are you sure you want to delete the post?"
+			btnClassName={btnClassName}
 		/>
 	);
 };

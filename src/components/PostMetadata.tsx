@@ -7,7 +7,12 @@ import { Post } from "@/types/Post";
 import LinkClient from "./LinkClient";
 import { getUserId } from "@/actions/user.action";
 
-const PostMetadata = async ({ post }: { post: Post }) => {
+type PostMetadataProps = {
+	post: Post;
+	btnClassName?: string;
+}
+
+const PostMetadata = async ({ post, btnClassName }: PostMetadataProps) => {
 	const userId = await getUserId();
 
 	if (!post) {
@@ -45,12 +50,12 @@ const PostMetadata = async ({ post }: { post: Post }) => {
 			{userId == post.authorId ? (
 				<div className="flex flex-row">
 					<span className="m-1" />
-					<CircularButton variant="ghost" size="icon">
+					<CircularButton variant="ghost" size="icon" className={btnClassName}>
 						<LinkClient href={`/edit-post/${post.id}`}>
 							<Pencil />
 						</LinkClient>
 					</CircularButton>
-					<DeletePostButton postId={post.id ?? ""} />
+					<DeletePostButton postId={post.id ?? ""} btnClassName={btnClassName}/>
 				</div>
 			) : null}
 		</div>

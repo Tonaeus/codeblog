@@ -15,7 +15,7 @@ const PostCard = async ({ post }: { post: Post }) => {
 				transition-all hover:bg-accent dark:hover:bg-accent/50
 			"
 		>
-			<PostMetadata post={post} />
+			<PostMetadata post={post} btnClassName="hover:bg-aa-btn dark:hover:bg-aa-btn" />
 			<div className="space-y-2 flex flex-col items-start w-full">
 				<div className="prose-sm dark:prose-invert whitespace-normal break-words hyphens-auto text-left">
 					<h1 className="line-clamp-3">{post?.title}</h1>
