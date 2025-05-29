@@ -111,11 +111,6 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 		}
 	};
 
-	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-		e.stopPropagation();
-		e.preventDefault();
-	};
-
 	const containerClasses =
 		optimisticOpinion === Opinion.Neutral
 			? "bg-aa-btn"
@@ -153,7 +148,6 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 	return (
 		<div
 			className={`flex flex-row w-max rounded-full justify-center items-center cursor-default transition-all ${containerClasses}`}
-			onClick={(e) => handleClick(e)}
 		>
 			<CircularButton
 				size="icon"

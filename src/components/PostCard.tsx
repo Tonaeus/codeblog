@@ -2,6 +2,7 @@ import { Post } from "@/types/Post";
 import PostMetadata from "./PostMetadata";
 import OpinionButtons from "./OpinionButtons";
 import Link from "next/link";
+import StopPropagationWrapper from "./StopPropagationWrapper";
 
 const PostCard = async ({ post }: { post: Post }) => {
 	return (
@@ -15,7 +16,10 @@ const PostCard = async ({ post }: { post: Post }) => {
 				transition-all hover:bg-accent dark:hover:bg-accent/50
 			"
 		>
-			<PostMetadata post={post} btnClassName="hover:bg-aa-btn dark:hover:bg-aa-btn" />
+			<PostMetadata
+				post={post}
+				btnClassName="hover:bg-aa-btn dark:hover:bg-aa-btn"
+			/>
 			<div className="space-y-2 flex flex-col items-start w-full">
 				<div className="prose-sm dark:prose-invert whitespace-normal break-words hyphens-auto text-left">
 					<h1 className="line-clamp-3">{post?.title}</h1>
@@ -24,7 +28,9 @@ const PostCard = async ({ post }: { post: Post }) => {
 					<p className="line-clamp-6">{post?.description}</p>
 				</div>
 			</div>
-			<OpinionButtons post={post} />
+			<StopPropagationWrapper>
+				<OpinionButtons post={post} />
+			</StopPropagationWrapper>
 		</Link>
 	);
 };

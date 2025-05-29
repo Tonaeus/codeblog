@@ -17,9 +17,6 @@ const DeletePostButton = ({ postId, btnClassName }: DeletePostButtonProps) => {
 	const router = useRouter();
 
 	const handleDelete = async () => {
-		console.log("delete");
-		console.log("pathname", pathname);
-		console.log("basepath", pathname.split("/")[1]);
 		if (isDeleting) {
 			return;
 		}
