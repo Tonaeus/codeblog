@@ -30,7 +30,9 @@ const Navbar = async () => {
 							</Link>
 						</CircularButton>
 						<CircularButton variant="ghost" size="icon">
-							<Bell />
+							<Link href="/notifications">
+								<Bell />
+							</Link>
 						</CircularButton>
 					</>
 				) : null}
