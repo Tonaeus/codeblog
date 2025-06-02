@@ -7,7 +7,7 @@ const GET = async () => {
     const userId = await getDbUserId();
 
     if (!userId) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(null, { status: 401 });
     }
 
     const notifications = await prisma.notification.findMany({
@@ -39,7 +39,7 @@ const GET = async () => {
   }
   catch (error) {
     console.error("Error in GET /api/notifications", error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(null, { status: 500 });
   }
 };
 
@@ -48,7 +48,7 @@ const PATCH = async (request: NextRequest) => {
     const userId = await getDbUserId();
 
     if (!userId) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(null, { status: 401 });
     }
 
     const body = await request.json();
@@ -69,7 +69,7 @@ const PATCH = async (request: NextRequest) => {
   }
   catch (error) {
     console.error("Error in PATCH /api/notifications", error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(null, { status: 500 });
   }
 };
 

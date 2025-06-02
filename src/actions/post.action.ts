@@ -212,31 +212,6 @@ const getEditPost = async (postId: string) => {
   }
 };
 
-const getOpinion = async (postId: string) => {
-  try {
-    const userId = await getDbUserId();
-
-    if (!userId) {
-      return { success: false };
-    };
-
-    const opinion = await prisma.opinion.findUnique({
-      where: {
-        userId_postId: {
-          userId,
-          postId,
-        }
-      }
-    });
-
-    return { success: true, opinion };
-  }
-  catch (error) {
-    console.log("Error in getOpinion", error);
-    return { success: false };
-  }
-};
-
 const deletePost = async (postId: string) => {
   try {
     const userId = await getDbUserId();
@@ -270,103 +245,6 @@ const deletePost = async (postId: string) => {
   }
 };
 
-const toggleOpinion = async (postId: string, inputOpinion: Opinion) => {
-  try {
-    const userId = await getDbUserId();
-
-    if (!userId) {
-      return { success: false };
-    };
-
-    const existingOpinion = await prisma.opinion.findUnique({
-      where: {
-        userId_postId: {
-          userId,
-          postId,
-        },
-      },
-    });
-
-    const post = await prisma.post.findUnique({
-      where: {
-        id: postId
-      },
-      select: {
-        authorId: true
-      },
-    });
-
-    if (!post) {
-      return { success: false };
-    };
-
-    const upvoteNotification = post.authorId !== userId && inputOpinion === Opinion.Positive
-      ? prisma.notification.upsert({
-        where: {
-          type_recipientId_senderId_postId: {
-            type: "UPVOTE",
-            recipientId: post.authorId,
-            senderId: userId,
-            postId,
-          },
-        },
-        create: {
-          type: "UPVOTE",
-          recipientId: post.authorId,
-          senderId: userId,
-          postId,
-        },
-        update: {},
-      })
-      : null;
-
-    if (!existingOpinion) {
-      await prisma.$transaction([
-        prisma.opinion.create({
-          data: {
-            userId,
-            postId,
-            opinion: inputOpinion
-          },
-        }),
-        ...(upvoteNotification ? [upvoteNotification] : []),
-      ]);
-    }
-    else if (existingOpinion.opinion === inputOpinion) {
-      await prisma.opinion.delete({
-        where: {
-          userId_postId: {
-            userId,
-            postId
-          }
-        },
-      });
-    }
-    else {
-      await prisma.$transaction([
-        prisma.opinion.update({
-          where: {
-            userId_postId: {
-              userId,
-              postId
-            }
-          },
-          data: {
-            opinion: inputOpinion
-          },
-        }),
-        ...(upvoteNotification ? [upvoteNotification] : []),
-      ]);
-    }
-
-    return { success: true };
-  }
-  catch (error) {
-    console.log("Error in toggleOpinion", error);
-    return { success: false };
-  }
-};
-
 export {
   createPost,
   getPost,
@@ -374,6 +252,4 @@ export {
   editPost,
   getEditPost,
   deletePost,
-  getOpinion,
-  toggleOpinion,
 };

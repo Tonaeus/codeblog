@@ -67,9 +67,10 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 			}
 
 			try {
-				const result = await getOpinion(post.id);
-				if (result?.success) {
-					const opinion = result.opinion?.opinion;
+				const response = await fetch(`/api/opinion?postId=${post.id}`);
+				const json = await response.json();
+				if (response.ok && json) {
+					const opinion = json.opinion;
 					setOptimisticOpinion(opinion ?? Opinion.Neutral);
 				}
 			} catch (error) {
@@ -109,7 +110,13 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 		try {
 			setOptimisticOpinion(newOpinion);
 			setOptimisticOpinionSum(oldOpinionSum + opinionSumChange);
-			await toggleOpinion(post.id, inputOpinion);
+			await fetch("/api/opinion", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ postId: post.id, opinion: inputOpinion }),
+			});
 		} catch {
 			setOptimisticOpinion(oldOpinion);
 			setOptimisticOpinionSum(oldOpinionSum);
