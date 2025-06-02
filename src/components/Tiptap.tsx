@@ -62,9 +62,9 @@ const EditorToolbar = ({
 	const [width, setWidth] = useState(0);
 
 	useEffect(() => {
-			const handleResize = () => setWidth(window.innerWidth);
-			window.addEventListener("resize", handleResize);
-			return () => window.removeEventListener("resize", handleResize);
+		const handleResize = () => setWidth(window.innerWidth);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
 	useEffect(() => {
@@ -501,51 +501,52 @@ type TiptapProps = {
 	invalid: boolean;
 };
 
-const Tiptap = forwardRef(({ value, onChange, className, disabled, invalid }: TiptapProps, ref) => {
-	const [isOpen, setIsOpen] = useState(false);
+const Tiptap = forwardRef(
+	({ value, onChange, className, disabled, invalid }: TiptapProps, ref) => {
+		const [isOpen, setIsOpen] = useState(false);
 
-	const lowlight = createLowlight(all);
+		const lowlight = createLowlight(all);
 
-	const editor = useEditor({
-		immediatelyRender: false,
-		// editable: false,
-		extensions: [
-			StarterKit,
-			Underline,
-			Superscript,
-			Subscript,
-			CodeBlockLowlight.configure({ lowlight }),
-		],
-		editorProps: {
-			attributes: {
-				class: `${className ?? ""} focus:outline-none`,
+		const editor = useEditor({
+			immediatelyRender: false,
+			// editable: false,
+			extensions: [
+				StarterKit,
+				Underline,
+				Superscript,
+				Subscript,
+				CodeBlockLowlight.configure({ lowlight }),
+			],
+			editorProps: {
+				attributes: {
+					class: `${className ?? ""} focus:outline-none`,
+				},
 			},
-		},
-		content: value,
-		onUpdate: ({ editor }) => {
-			onChange(editor.getHTML());
-		},
-	});
+			content: value,
+			onUpdate: ({ editor }) => {
+				onChange(editor.getHTML());
+			},
+		});
 
-	useEffect(() => {
-		if (editor && value !== editor.getHTML()) {
-			editor.commands.setContent(value);
-		}
-	}, [value, editor]);
+		useEffect(() => {
+			if (editor && value !== editor.getHTML()) {
+				editor.commands.setContent(value);
+			}
+		}, [value, editor]);
 
-	useImperativeHandle(ref, () => ({
-		focus: () => {
-			if (!disabled && editor) {
-        editor.commands.focus();
-      }
-		},
-	}));
+		useImperativeHandle(ref, () => ({
+			focus: () => {
+				if (!disabled && editor) {
+					editor.commands.focus();
+				}
+			},
+		}));
 
-	return (
-		<div
-			aria-invalid={invalid ? "true" : "false"}
-			tabIndex={0}
-			className={`
+		return (
+			<div
+				aria-invalid={invalid ? "true" : "false"}
+				tabIndex={0}
+				className={`
 				flex flex-col flex-1 overflow-hidden 
 
         bg-transparent dark:bg-input/30
@@ -561,17 +562,23 @@ const Tiptap = forwardRef(({ value, onChange, className, disabled, invalid }: Ti
         focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]
 
 				${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}
+
+				selection:bg-primary selection:text-primary-foreground
       `}
-		>
-			<EditorToolbar
-				editor={editor}
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				className="p-1"
-			/>
-			<EditorContent editor={editor} className="px-3 pb-1 whitespace-normal break-words hyphens-auto" />
-		</div>
-	);
-});
+			>
+				<EditorToolbar
+					editor={editor}
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					className="p-1"
+				/>
+				<EditorContent
+					editor={editor}
+					className="px-3 pb-1 whitespace-normal break-words hyphens-auto"
+				/>
+			</div>
+		);
+	}
+);
 
 export default Tiptap;
