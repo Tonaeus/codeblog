@@ -6,8 +6,6 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
-import { all, createLowlight } from "lowlight";
 
 import {
 	BoldIcon,
@@ -505,8 +503,6 @@ const Tiptap = forwardRef(
 	({ value, onChange, className, disabled, invalid }: TiptapProps, ref) => {
 		const [isOpen, setIsOpen] = useState(false);
 
-		const lowlight = createLowlight(all);
-
 		const editor = useEditor({
 			immediatelyRender: false,
 			// editable: false,
@@ -514,8 +510,7 @@ const Tiptap = forwardRef(
 				StarterKit,
 				Underline,
 				Superscript,
-				Subscript,
-				CodeBlockLowlight.configure({ lowlight }),
+				Subscript
 			],
 			editorProps: {
 				attributes: {
