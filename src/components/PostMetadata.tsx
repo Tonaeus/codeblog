@@ -33,14 +33,14 @@ const PostMetadata = async ({ post, btnClassName }: PostMetadataProps) => {
 				<span className="m-1" />
 				<div className="flex flex-col justify-center min-w-0">
 					<StopPropagationWrapper>
-						<b className="text-sm truncate leading-tight">
-							<LinkClient
-								href={`/profile/${post.author?.username}`}
-								className="flex justify-start hover:text-primary"
-							>
+						<LinkClient
+							href={`/profile/${post.author?.username}`}
+							className="flex justify-start hover:text-primary"
+						>
+							<b className="text-sm truncate leading-tight">
 								{post.author?.name || post.author?.username}
-							</LinkClient>
-						</b>
+							</b>
+						</LinkClient>
 					</StopPropagationWrapper>
 					<StopPropagationWrapper>
 						<div className="text-xs truncate leading-tight">

@@ -13,38 +13,39 @@ const NotificationCard = ({ notification }: { notification: Notification }) => {
 					<AvatarImage src={notification.sender.image ?? "/avatar.png"} />
 				</Avatar>
 			</Link>
-			<div className="flex-1 h-full flex flex-col justify-center items-start min-w-0">
-				<p className="text-sm leading-tight truncate">
-					<b>
+			<div className="h-full flex flex-col justify-center overflow-hidden bg-red-100">
+				<div className="w-full min-w-0 flex">
+					<p className="text-sm leading-tight truncate">
 						<Link
 							href={`/profile/${notification.sender.username}`}
 							className="inline hover:text-primary"
 						>
-							{notification.sender.name || notification.sender.username}
+							<b>{notification.sender.name || notification.sender.username}</b>
 						</Link>
-					</b>{" "}
-					liked your{" "}
-					<b>
+						<span className="inline"> liked your </span>
 						<Link
 							href={`/post/${notification.post?.id}`}
 							className="inline hover:text-primary"
 						>
-							post
+							<b>post</b>
 						</Link>
-					</b>
-				</p>
-				<div className="text-xs truncate leading-tight">
-					{notification.createdAt
-						? new Date().getTime() -
-								new Date(notification.createdAt).getTime() <
-						  7 * 24 * 60 * 60 * 1000
-							? formatDistanceToNowStrict(new Date(notification.createdAt)) +
-							  " ago"
-							: format(new Date(notification.createdAt), "MMM d, yyyy")
-						: ""}
+					</p>
+				</div>
+				<div className="w-full min-w-0 flex">
+					<div className="text-xs truncate leading-tight">
+						{notification.createdAt
+							? new Date().getTime() -
+									new Date(notification.createdAt).getTime() <
+							  7 * 24 * 60 * 60 * 1000
+								? formatDistanceToNowStrict(new Date(notification.createdAt)) +
+								  " ago"
+								: format(new Date(notification.createdAt), "MMM d, yyyy")
+							: ""}
+					</div>
 				</div>
 			</div>
-			<div className="flex justify-center items-center h-full w-4">
+			<div className="h-full flex-1 -ml-2 bg-green-100" />
+			<div className="flex flex-shrink-0 justify-center items-center h-full w-4 bg-blue-100">
 				{!notification.read ? (
 					<div className="bg-primary rounded-full h-2 w-2" />
 				) : null}
