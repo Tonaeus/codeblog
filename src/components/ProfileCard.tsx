@@ -1,13 +1,13 @@
 import { getProfile } from "@/actions/profile.action";
 import { Avatar, AvatarImage } from "./ui/avatar";
 
-type Profile = NonNullable<Awaited<ReturnType<typeof getProfile>>["profile"]>;
+type Profile = Awaited<ReturnType<typeof getProfile>>["profile"];
 
 const ProfileCard = ({ profile }: { profile: Profile }) => {
 	return (
 		<div className="flex flex-col justify-center items-center bg-green-300">
 			<Avatar className="w-45 h-45 aspect-square">
-				<AvatarImage src={profile.image ?? "/avatar.png"} />
+				<AvatarImage src={profile?.image ?? "/avatar.png"} />
 			</Avatar>
 			{/* <div className="w-1/4 aspect-square rounded-full overflow-hidden">
 				<img
@@ -18,10 +18,10 @@ const ProfileCard = ({ profile }: { profile: Profile }) => {
 			</div> */}
 
 			<div>
-				{`${profile.firstName} ${profile.lastName}`}
+				{`${profile?.firstName} ${profile?.lastName}`}
 			</div>
 			<div>
-				{profile.username}
+				{profile?.username}
 			</div>
 		</div>
 	);

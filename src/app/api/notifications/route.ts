@@ -19,7 +19,8 @@ const GET = async () => {
           select: {
             id: true,
             username: true,
-            name: true,
+            firstName: true,
+            lastName: true,
             image: true,
           },
         },
