@@ -40,7 +40,8 @@ const getPost = async (postId: string) => {
           select: {
             id: true,
             username: true,
-            name: true,
+            firstName: true,
+            lastName: true,
             image: true,
           },
         },
@@ -90,7 +91,8 @@ const getPosts = async (limit: number = 15) => {
           select: {
             id: true,
             username: true,
-            name: true,
+            firstName: true,
+            lastName: true,
             image: true,
           },
         },
@@ -118,7 +120,8 @@ const getPosts = async (limit: number = 15) => {
           select: {
             id: true,
             username: true,
-            name: true,
+            firstName: true,
+            lastName: true,
             image: true,
           },
         },

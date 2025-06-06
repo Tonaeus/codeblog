@@ -1,4 +1,4 @@
-import { getNotifications } from "@/actions/notification.action";
+import { getNotifications } from "@/actions/notification.";
 
 type Notification = NonNullable<
 	Awaited<ReturnType<typeof getNotifications>>["notifications"]

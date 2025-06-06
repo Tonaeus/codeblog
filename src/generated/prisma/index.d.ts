@@ -1531,7 +1531,8 @@ export namespace Prisma {
     clerkId: string | null
     username: string | null
     image: string | null
-    name: string | null
+    firstName: string | null
+    lastName: string | null
     pronoun: string | null
     bio: string | null
     company: string | null
@@ -1551,7 +1552,8 @@ export namespace Prisma {
     clerkId: string | null
     username: string | null
     image: string | null
-    name: string | null
+    firstName: string | null
+    lastName: string | null
     pronoun: string | null
     bio: string | null
     company: string | null
@@ -1571,7 +1573,8 @@ export namespace Prisma {
     clerkId: number
     username: number
     image: number
-    name: number
+    firstName: number
+    lastName: number
     pronoun: number
     bio: number
     company: number
@@ -1593,7 +1596,8 @@ export namespace Prisma {
     clerkId?: true
     username?: true
     image?: true
-    name?: true
+    firstName?: true
+    lastName?: true
     pronoun?: true
     bio?: true
     company?: true
@@ -1613,7 +1617,8 @@ export namespace Prisma {
     clerkId?: true
     username?: true
     image?: true
-    name?: true
+    firstName?: true
+    lastName?: true
     pronoun?: true
     bio?: true
     company?: true
@@ -1633,7 +1638,8 @@ export namespace Prisma {
     clerkId?: true
     username?: true
     image?: true
-    name?: true
+    firstName?: true
+    lastName?: true
     pronoun?: true
     bio?: true
     company?: true
@@ -1726,7 +1732,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name: string | null
+    firstName: string | null
+    lastName: string | null
     pronoun: string | null
     bio: string | null
     company: string | null
@@ -1763,7 +1770,8 @@ export namespace Prisma {
     clerkId?: boolean
     username?: boolean
     image?: boolean
-    name?: boolean
+    firstName?: boolean
+    lastName?: boolean
     pronoun?: boolean
     bio?: boolean
     company?: boolean
@@ -1791,7 +1799,8 @@ export namespace Prisma {
     clerkId?: boolean
     username?: boolean
     image?: boolean
-    name?: boolean
+    firstName?: boolean
+    lastName?: boolean
     pronoun?: boolean
     bio?: boolean
     company?: boolean
@@ -1811,7 +1820,8 @@ export namespace Prisma {
     clerkId?: boolean
     username?: boolean
     image?: boolean
-    name?: boolean
+    firstName?: boolean
+    lastName?: boolean
     pronoun?: boolean
     bio?: boolean
     company?: boolean
@@ -1831,7 +1841,8 @@ export namespace Prisma {
     clerkId?: boolean
     username?: boolean
     image?: boolean
-    name?: boolean
+    firstName?: boolean
+    lastName?: boolean
     pronoun?: boolean
     bio?: boolean
     company?: boolean
@@ -1845,7 +1856,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "clerkId" | "username" | "image" | "name" | "pronoun" | "bio" | "company" | "location" | "website1" | "website2" | "website3" | "website4" | "website5" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "clerkId" | "username" | "image" | "firstName" | "lastName" | "pronoun" | "bio" | "company" | "location" | "website1" | "website2" | "website3" | "website4" | "website5" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | User$postsArgs<ExtArgs>
     commnets?: boolean | User$commnetsArgs<ExtArgs>
@@ -1876,7 +1887,8 @@ export namespace Prisma {
       clerkId: string
       username: string
       image: string
-      name: string | null
+      firstName: string | null
+      lastName: string | null
       pronoun: string | null
       bio: string | null
       company: string | null
@@ -2323,7 +2335,8 @@ export namespace Prisma {
     readonly clerkId: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
     readonly image: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
+    readonly firstName: FieldRef<"User", 'String'>
+    readonly lastName: FieldRef<"User", 'String'>
     readonly pronoun: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly company: FieldRef<"User", 'String'>
@@ -8633,7 +8646,8 @@ export namespace Prisma {
     clerkId: 'clerkId',
     username: 'username',
     image: 'image',
-    name: 'name',
+    firstName: 'firstName',
+    lastName: 'lastName',
     pronoun: 'pronoun',
     bio: 'bio',
     company: 'company',
@@ -8831,7 +8845,8 @@ export namespace Prisma {
     clerkId?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
     image?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
+    firstName?: StringNullableFilter<"User"> | string | null
+    lastName?: StringNullableFilter<"User"> | string | null
     pronoun?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     company?: StringNullableFilter<"User"> | string | null
@@ -8858,7 +8873,8 @@ export namespace Prisma {
     clerkId?: SortOrder
     username?: SortOrder
     image?: SortOrder
-    name?: SortOrderInput | SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
     pronoun?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     company?: SortOrderInput | SortOrder
@@ -8888,7 +8904,8 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     image?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
+    firstName?: StringNullableFilter<"User"> | string | null
+    lastName?: StringNullableFilter<"User"> | string | null
     pronoun?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     company?: StringNullableFilter<"User"> | string | null
@@ -8915,7 +8932,8 @@ export namespace Prisma {
     clerkId?: SortOrder
     username?: SortOrder
     image?: SortOrder
-    name?: SortOrderInput | SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
     pronoun?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     company?: SortOrderInput | SortOrder
@@ -8941,7 +8959,8 @@ export namespace Prisma {
     clerkId?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
     image?: StringWithAggregatesFilter<"User"> | string
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    firstName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
     pronoun?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     company?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -9319,7 +9338,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -9346,7 +9366,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -9373,7 +9394,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9400,7 +9422,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9427,7 +9450,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -9447,7 +9471,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9467,7 +9492,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9927,7 +9953,8 @@ export namespace Prisma {
     clerkId?: SortOrder
     username?: SortOrder
     image?: SortOrder
-    name?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     pronoun?: SortOrder
     bio?: SortOrder
     company?: SortOrder
@@ -9947,7 +9974,8 @@ export namespace Prisma {
     clerkId?: SortOrder
     username?: SortOrder
     image?: SortOrder
-    name?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     pronoun?: SortOrder
     bio?: SortOrder
     company?: SortOrder
@@ -9967,7 +9995,8 @@ export namespace Prisma {
     clerkId?: SortOrder
     username?: SortOrder
     image?: SortOrder
-    name?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     pronoun?: SortOrder
     bio?: SortOrder
     company?: SortOrder
@@ -11540,7 +11569,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -11566,7 +11596,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -11698,7 +11729,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11724,7 +11756,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11798,7 +11831,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -11824,7 +11858,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -11955,7 +11990,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11981,7 +12017,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12076,7 +12113,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12102,7 +12140,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12202,7 +12241,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12228,7 +12268,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12324,7 +12365,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12350,7 +12392,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12381,7 +12424,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12407,7 +12451,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12449,7 +12494,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12475,7 +12521,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12512,7 +12559,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12538,7 +12586,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12564,7 +12613,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12590,7 +12640,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12621,7 +12672,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12647,7 +12699,8 @@ export namespace Prisma {
     clerkId: string
     username: string
     image: string
-    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
     pronoun?: string | null
     bio?: string | null
     company?: string | null
@@ -12747,7 +12800,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12773,7 +12827,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12810,7 +12865,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12836,7 +12892,8 @@ export namespace Prisma {
     clerkId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     pronoun?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null

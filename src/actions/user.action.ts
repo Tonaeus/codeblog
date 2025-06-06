@@ -27,18 +27,28 @@ const syncUser = async () => {
       }
     });
 
-    if (existingUser) {
-      return;
-    }
+    const userData = {
+      email: user.emailAddresses[0].emailAddress,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      image: user.imageUrl,
+    };
 
-    await prisma.user.create({
-      data: {
-        clerkId: clerkId,
-        email: user.emailAddresses[0].emailAddress,
-        username: user.username,
-        image: user.imageUrl,
-      }
-    });
+    if (existingUser) {
+      await prisma.user.update({
+        where: { clerkId },
+        data: userData
+      });
+    } 
+    else {
+      await prisma.user.create({
+        data: {
+          clerkId,
+          ...userData
+        }
+      });
+    }
 
     return;
   }

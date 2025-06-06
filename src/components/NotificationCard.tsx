@@ -13,14 +13,17 @@ const NotificationCard = ({ notification }: { notification: Notification }) => {
 					<AvatarImage src={notification.sender.image ?? "/avatar.png"} />
 				</Avatar>
 			</Link>
-			<div className="h-full flex flex-col justify-center overflow-hidden bg-red-100">
+			<div className="h-full flex flex-col justify-center overflow-hidden">
 				<div className="w-full min-w-0 flex">
 					<p className="text-sm leading-tight truncate">
 						<Link
 							href={`/profile/${notification.sender.username}`}
 							className="inline hover:text-primary"
 						>
-							<b>{notification.sender.name || notification.sender.username}</b>
+							<b>
+								{`${notification.sender.firstName} ${notification.sender.lastName}` ||
+									notification.sender.username}
+							</b>
 						</Link>
 						<span className="inline"> liked your </span>
 						<Link
@@ -44,8 +47,8 @@ const NotificationCard = ({ notification }: { notification: Notification }) => {
 					</div>
 				</div>
 			</div>
-			<div className="h-full flex-1 -ml-2 bg-green-100" />
-			<div className="flex flex-shrink-0 justify-center items-center h-full w-4 bg-blue-100">
+			<div className="h-full flex-1 -ml-2" />
+			<div className="flex flex-shrink-0 justify-center items-center h-full w-4">
 				{!notification.read ? (
 					<div className="bg-primary rounded-full h-2 w-2" />
 				) : null}

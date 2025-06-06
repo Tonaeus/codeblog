@@ -20,7 +20,8 @@ model User {
   clerkId   String   @unique
   username  String   @unique
   image     String
-  name      String?
+  firstName String?
+  lastName  String?
   pronoun   String?
   bio       String?
   company   String?

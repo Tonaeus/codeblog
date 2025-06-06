@@ -38,7 +38,7 @@ const PostMetadata = async ({ post, btnClassName }: PostMetadataProps) => {
 							className="flex justify-start hover:text-primary"
 						>
 							<b className="text-sm truncate leading-tight">
-								{post.author?.name || post.author?.username}
+								{`${post.author?.firstName} ${post.author?.lastName}` || post.author?.username}
 							</b>
 						</LinkClient>
 					</StopPropagationWrapper>
