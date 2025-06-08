@@ -13,7 +13,7 @@ const profilePage = async ({ params }: { params: { username: string } }) => {
 	}
 
   const profile = result.profile!;
-  console.log("profile", result.profile)
+  // console.log("profile", result.profile)
 
 	return (
 		<div className="flex flex-col flex-1 w-full items-center bg-blue-300">

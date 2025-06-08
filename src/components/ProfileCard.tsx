@@ -5,23 +5,15 @@ type Profile = Awaited<ReturnType<typeof getProfile>>["profile"];
 
 const ProfileCard = ({ profile }: { profile: Profile }) => {
 	return (
-		<div className="flex flex-col justify-center items-center bg-green-300">
+		<div className="flex flex-col justify-center items-center gap-2 bg-green-300">
 			<Avatar className="w-45 h-45 aspect-square">
 				<AvatarImage src={profile?.image ?? "/avatar.png"} />
 			</Avatar>
-			{/* <div className="w-1/4 aspect-square rounded-full overflow-hidden">
-				<img
-					src={profile.image ?? "/avatar.png"}
-					alt="avatar"
-					className="object-cover w-full h-full"
-				/>
-			</div> */}
-
-			<div>
-				{`${profile?.firstName} ${profile?.lastName}`}
-			</div>
-			<div>
-				{profile?.username}
+			<div className="flex flex-col w-full overflow-hidden">
+				<div className="text-2xl font-bold text-primary truncate w-full text-center">
+					{`${profile?.firstName ?? ""} ${profile?.lastName ?? ""}`}
+				</div>
+				<div className="truncate w-full text-center">@{profile?.username}</div>
 			</div>
 		</div>
 	);
