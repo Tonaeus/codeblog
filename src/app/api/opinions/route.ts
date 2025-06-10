@@ -30,7 +30,7 @@ const GET = async (request: NextRequest) => {
     return NextResponse.json(opinion, { status: 200 });
   }
   catch (error) {
-    console.error("Error in GET /api/opinion", error);
+    console.error("Error in GET /api/opinions", error);
     return NextResponse.json(null, { status: 500 });
   }
 }
@@ -134,7 +134,7 @@ const POST = async (req: NextRequest) => {
     return NextResponse.json(null, { status: 200 });
   }
   catch (error) {
-    console.error("Error in POST /api/opinion", error);
+    console.error("Error in POST /api/opinions", error);
     return NextResponse.json(null, { status: 500 });
   }
 }

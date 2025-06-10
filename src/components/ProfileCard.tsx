@@ -1,7 +1,5 @@
-import { getProfile } from "@/actions/profile.action";
+import type { Profile } from "@/types/Profile";
 import { Avatar, AvatarImage } from "./ui/avatar";
-
-type Profile = Awaited<ReturnType<typeof getProfile>>["profile"];
 
 const ProfileCard = ({ profile }: { profile: Profile }) => {
 	return (

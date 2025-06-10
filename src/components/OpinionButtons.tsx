@@ -6,7 +6,6 @@ import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
 import numeral from "numeral";
 import { useEffect, useState } from "react";
-import { getOpinion, toggleOpinion } from "@/actions/post.action";
 import { useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { Post } from "@/types/Post";
@@ -67,7 +66,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 			}
 
 			try {
-				const response = await fetch(`/api/opinion?postId=${post.id}`);
+				const response = await fetch(`/api/opinions?postId=${post.id}`);
 				const json = await response.json();
 				if (response.ok && json) {
 					const opinion = json.opinion;
@@ -110,7 +109,7 @@ const OpinionButtons = ({ post }: { post: Post }) => {
 		try {
 			setOptimisticOpinion(newOpinion);
 			setOptimisticOpinionSum(oldOpinionSum + opinionSumChange);
-			await fetch("/api/opinion", {
+			await fetch("/api/opinions", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
