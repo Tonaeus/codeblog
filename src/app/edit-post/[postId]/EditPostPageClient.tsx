@@ -74,10 +74,7 @@ const EditPostPageClient = ({ post }: { post: EditPost }) => {
 					richColors: true,
 				});
 			} else {
-				toast.error("Failed to edit your post.", {
-					position: "top-center",
-					richColors: true,
-				});
+				throw new Error();
 			}
 		} catch (error) {
 			console.error("Failed to edit post", error);

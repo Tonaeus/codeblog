@@ -1,4 +1,5 @@
 import { getProfile, getUserFollowers, getUserFollowing, getUserPosts, isFollowing } from "@/actions/profile.action";
+import { getDbUserId } from "@/actions/user.action";
 import FollowButton from "@/components/FollowButton";
 import ProfileCard from "@/components/ProfileCard";
 import { notFound } from "next/navigation";
@@ -13,6 +14,8 @@ const profilePage = async ({ params }: { params: { username: string } }) => {
 	}
 
   const profile = result.profile!;
+
+	const userId = await getDbUserId();
 
 	const [initialIsFollowingResult, postsResult, followersResult, followingResult] = await Promise.all([
 		isFollowing(profile.id),
@@ -30,7 +33,11 @@ const profilePage = async ({ params }: { params: { username: string } }) => {
 		<div className="flex flex-col flex-1 w-full items-center bg-blue-300">
 			<div className="max-w-3xl w-full p-4 flex flex-col flex-1 bg-orange-300">
 				<ProfileCard profile={profile} />
-				<FollowButton profile={profile} initialIsFollowing={initialIsFollowing ?? false}/>
+				{
+					profile.id !== userId ? 
+					<FollowButton profile={profile} initialIsFollowing={initialIsFollowing ?? false}/> :
+					null
+				}
 			</div>
 		</div>
 	);
