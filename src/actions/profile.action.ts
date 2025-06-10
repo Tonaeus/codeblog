@@ -114,7 +114,7 @@ const isFollowing = async (userId: string) => {
       },
     });
 
-    return { success: false, isFollowing: !!follow};
+    return { success: true, isFollowing: !!follow};
   }
   catch (error) {
     console.log("Error in isFollowing", error);
