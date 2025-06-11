@@ -1,7 +1,22 @@
-import { getProfile } from "@/actions/profile.action";
+import {
+	getProfile,
+	getUserFollowers,
+	getUserFollowing,
+	getUserPosts,
+} from "@/actions/profile.action";
 
 type Profile = Awaited<ReturnType<typeof getProfile>>["profile"];
 
-export type {
-  Profile
-}
+type Post = NonNullable<
+	Awaited<ReturnType<typeof getUserPosts>>["posts"]
+>[number];
+
+type Follower = NonNullable<
+	Awaited<ReturnType<typeof getUserFollowers>>["followers"]
+>[number];
+
+type Following = NonNullable<
+	Awaited<ReturnType<typeof getUserFollowing>>["following"]
+>[number];
+
+export type { Profile, Post, Follower, Following };

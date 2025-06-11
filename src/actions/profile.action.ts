@@ -26,9 +26,9 @@ const getProfile = async (username: string) => {
 
 const getUserPosts = async (userId: string) => {
   try {
-    const posts = await prisma.post.findMany({
+    const postData = await prisma.post.findMany({
       where: {
-        id: userId,
+        authorId: userId,
       },
       include: {
         author: {
@@ -42,6 +42,25 @@ const getUserPosts = async (userId: string) => {
         },
       },
     });
+
+    const opinionData = await prisma.opinion.groupBy({
+      by: ['postId'],
+      _sum: { 
+        opinion: true
+      },
+      where: {
+        postId: { 
+          in: postData.map(p => p.id) 
+        },
+      },
+    });
+
+    const opinionMap = new Map(opinionData.map(o => [o.postId, o._sum.opinion ?? 0]));
+
+    const posts = postData.map(p => ({
+      ...p,
+      opinionSum: opinionMap.get(p.id) ?? 0,
+    }));
 
     return { success: true, posts };
   }
