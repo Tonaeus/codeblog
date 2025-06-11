@@ -44,8 +44,8 @@ const profilePage = async ({ params }: { params: { username: string } }) => {
 		: false;
 
 	return (
-		<div className="flex flex-col flex-1 w-full items-center bg-blue-300">
-			<div className="max-w-3xl w-full p-4 flex flex-col flex-1 bg-orange-300">
+		<div className="flex flex-col flex-1 w-full items-center">
+			<div className="max-w-3xl w-full p-4 flex flex-col flex-1 gap-2">
 				<ProfileCard profile={profile} />
 				{userId && profile.id !== userId ? (
 					<FollowButton

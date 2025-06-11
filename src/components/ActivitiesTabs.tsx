@@ -55,7 +55,7 @@ const ActivitiesTabs = ({
 	following,
 }: ActivitiesTabsProps) => {
 	return (
-		<Tabs defaultValue="posts" className="bg-red-400">
+		<Tabs defaultValue="posts">
 			<TabsList className="w-full">
 				<TabsTrigger value="posts">Posts</TabsTrigger>
 				<TabsTrigger value="followers">Followers</TabsTrigger>

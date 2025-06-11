@@ -3,7 +3,7 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 
 const ProfileCard = ({ profile }: { profile: Profile }) => {
 	return (
-		<div className="flex flex-col justify-center items-center gap-2 bg-green-300">
+		<div className="flex flex-col justify-center items-center gap-2 p-8">
 			<Avatar className="w-45 h-45 aspect-square">
 				<AvatarImage src={profile?.image ?? "/avatar.png"} />
 			</Avatar>
