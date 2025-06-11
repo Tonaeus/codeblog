@@ -76,6 +76,7 @@ const getUserFollowers = async (userId: string) => {
       where: { id: userId },
       include: {
         followers: {
+          orderBy: { createdAt: 'asc' },
           select: {
             follower: true,
           }
@@ -99,6 +100,7 @@ const getUserFollowing = async (userId: string) => {
       where: { id: userId },
       include: {
         following: {
+          orderBy: { createdAt: 'asc' },
           select: {
             following: true,
           }
