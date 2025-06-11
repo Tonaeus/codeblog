@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Follower, Following, Post } from "@/types/Profile";
 import PostCard from "./PostCard";
 import HorizontalDivider from "./HorizontalDivider";
+import UserCard from "./UserCard";
 
 type ActivitiesTabsProps = {
 	posts: Post[];
@@ -10,7 +11,6 @@ type ActivitiesTabsProps = {
 };
 
 const PostTab = ({ posts }: { posts: Post[] }) => {
-	console.log("posts", posts);
 	return (
 		<>
 			{posts?.map((post: Post, index: number) => (
@@ -24,11 +24,29 @@ const PostTab = ({ posts }: { posts: Post[] }) => {
 };
 
 const FollowersTab = ({ followers }: { followers: Follower[] }) => {
-	return <div>Folowers</div>;
+	return (
+		<>
+			{followers?.map((follower: Follower, index: number) => (
+				<div key={follower?.id}>
+					<UserCard user={follower} />
+					{index < followers.length - 1 && <HorizontalDivider />}
+				</div>
+			))}
+		</>
+	);
 };
 
-const FollowingTab = ({ following }: { following: Following[] }) => {
-	return <div>Following</div>;
+const FollowingTab = ({ followings }: { followings: Following[] }) => {
+	return (
+		<>
+			{followings?.map((following: Follower, index: number) => (
+				<div key={following?.id}>
+					<UserCard user={following} />
+					{index < followings.length - 1 && <HorizontalDivider />}
+				</div>
+			))}
+		</>
+	);
 };
 
 const ActivitiesTabs = ({
@@ -50,7 +68,7 @@ const ActivitiesTabs = ({
 				<FollowersTab followers={followers} />
 			</TabsContent>
 			<TabsContent value="following">
-				<FollowingTab following={following} />
+				<FollowingTab followings={following} />
 			</TabsContent>
 		</Tabs>
 	);

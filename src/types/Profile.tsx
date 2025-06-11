@@ -19,4 +19,6 @@ type Following = NonNullable<
 	Awaited<ReturnType<typeof getUserFollowing>>["following"]
 >[number];
 
-export type { Profile, Post, Follower, Following };
+type User = Follower | Following;
+
+export type { Profile, Post, Follower, Following, User };
