@@ -5,7 +5,7 @@ import { Opinion } from "@/types/Opinion";
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import CircularButton from "./ui/CircularButton";
 import numeral from "numeral";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { Post } from "@/types/Post";
@@ -44,41 +44,19 @@ const formatOpinionSum = (opinions: number) => {
 		: `${num}${suffix.toUpperCase()}`;
 };
 
-const OpinionButtons = ({ post }: { post: Post }) => {
-	const [optimisticOpinion, setOptimisticOpinion] = useState<Opinion>(
-		Opinion.Neutral
-	);
+type OpinionButtonsProps = {
+	post: Post;
+	initialOpinion: Opinion;
+};
+
+const OpinionButtons = ({ post, initialOpinion }: OpinionButtonsProps) => {
+	const [optimisticOpinion, setOptimisticOpinion] =
+		useState<Opinion>(initialOpinion);
 	const [optimisticOpinionSum, setOptimisticOpinionSum] = useState(
 		post?.opinionSum ?? 0
 	);
 
 	const { userId } = useAuth();
-
-	useEffect(() => {
-		const fetchOpinion = async () => {
-			if (!post?.id) {
-				return;
-			}
-
-			if (!userId) {
-				setOptimisticOpinion(Opinion.Neutral);
-				return;
-			}
-
-			try {
-				const response = await fetch(`/api/opinions?postId=${post.id}`);
-				const json = await response.json();
-				if (response.ok && json) {
-					const opinion = json.opinion;
-					setOptimisticOpinion(opinion ?? Opinion.Neutral);
-				}
-			} catch (error) {
-				console.error("Failed to fetch opinion:", error);
-			}
-		};
-
-		fetchOpinion();
-	}, [userId, post?.id]);
 
 	const handleOpinion = async (inputOpinion: Opinion) => {
 		if (!userId) {

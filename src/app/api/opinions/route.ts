@@ -3,38 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { Opinion } from "@/types/Opinion";
 import { NextRequest, NextResponse } from "next/server";
 
-const GET = async (request: NextRequest) => {
-  try {
-    const userId = await getDbUserId();
-
-    if (!userId) {
-      return NextResponse.json(null, { status: 401 });
-    }
-
-    const { searchParams } = new URL(request.url);
-    const postId = searchParams.get("postId");
-
-    if (!postId) {
-      return NextResponse.json(null, { status: 400 });
-    }
-
-    const opinion = await prisma.opinion.findUnique({
-      where: {
-        userId_postId: {
-          userId,
-          postId,
-        },
-      },
-    });
-
-    return NextResponse.json(opinion, { status: 200 });
-  }
-  catch (error) {
-    console.error("Error in GET /api/opinions", error);
-    return NextResponse.json(null, { status: 500 });
-  }
-}
-
 const POST = async (req: NextRequest) => {
   try {
     const userId = await getDbUserId();
@@ -140,6 +108,5 @@ const POST = async (req: NextRequest) => {
 }
 
 export {
-  GET,
   POST,
 }

@@ -248,6 +248,31 @@ const deletePost = async (postId: string) => {
   }
 };
 
+const getOpinion = async (postId: string) => {
+  try {
+    const userId = await getDbUserId();
+
+    if (!userId) {
+      return { success: false };
+    };
+
+    const opinion = await prisma.opinion.findUnique({
+      where: {
+        userId_postId: {
+          userId,
+          postId,
+        }
+      }
+    });
+
+    return { success: true, opinion };
+  }
+  catch (error) {
+    console.log("Error in getOpinion", error);
+    return { success: false };
+  }
+};
+
 export {
   createPost,
   getPost,
@@ -255,4 +280,5 @@ export {
   editPost,
   getEditPost,
   deletePost,
+  getOpinion,
 };

@@ -2,8 +2,13 @@ import { Post } from "@/types/Post";
 import PostMetadata from "./PostMetadata";
 import OpinionButtons from "./OpinionButtons";
 import Link from "next/link";
+import { getOpinion } from "@/actions/post.action";
+import { Opinion } from "@/types/Opinion";
 
 const PostCard = async ({ post }: { post: Post }) => {
+	const result = await getOpinion(post?.id ?? "");
+	const opinion = result.opinion?.opinion ?? Opinion.Neutral;
+
 	return (
 		<div
 			className="
@@ -28,7 +33,7 @@ const PostCard = async ({ post }: { post: Post }) => {
 					<p className="line-clamp-6">{post?.description}</p>
 				</div>
 			</div>
-			<OpinionButtons post={post} />
+			<OpinionButtons post={post} initialOpinion={opinion}/>
 		</div>
 	);
 };
