@@ -10,11 +10,11 @@ const Navbar = async () => {
 	const user = await currentUser();
 
 	if (user) {
-    await syncUser();
-  }
+		await syncUser();
+	}
 
 	return (
-		<nav className="h-14 grid grid-cols-2 md:grid-cols-3 px-4 border-b border-border">
+		<nav className="h-14 grid grid-cols-2 md:grid-cols-3 px-4 border-b border-border sticky top-0 z-50 bg-background">
 			<div className="hidden md:block col-span-1"></div>
 			<div className="col-span-1 flex justify-start md:justify-center items-center">
 				<Link href="/" className="text-2xl font-bold">

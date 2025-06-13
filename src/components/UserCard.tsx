@@ -22,7 +22,7 @@ const UserCard = async ({ user }: { user: User }) => {
 				transition-all hover:bg-accent dark:hover:bg-accent/50
 			"
 		>
-			<div className="flex flex-row justify-start items-center gap-2">
+			<div className="flex flex-row justify-start items-center gap-2 overflow-hidden">
 				<Link href={`/profile/${user.username}`}>
 					<Avatar>
 						<AvatarImage src={user.image ?? "/avatar.png"} />
