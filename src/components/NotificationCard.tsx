@@ -20,10 +20,7 @@ const NotificationCard = ({ notification }: { notification: Notification }) => {
 							href={`/profile/${notification.sender.username}`}
 							className="inline hover:text-primary"
 						>
-							<b>
-								{`${notification.sender.firstName} ${notification.sender.lastName}` ||
-									notification.sender.username}
-							</b>
+							<b>{notification.sender.username}</b>
 						</Link>
 						<span className="inline"> liked your </span>
 						<Link
