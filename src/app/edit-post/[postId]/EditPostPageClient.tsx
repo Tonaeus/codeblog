@@ -14,7 +14,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Tiptap from "@/components/Tiptap";
+import Tiptap from "@/components/post/Tiptap";
 import { useRef, useState } from "react";
 import { editPost, getEditPost } from "@/actions/post.action";
 import { useRouter } from "next/navigation";

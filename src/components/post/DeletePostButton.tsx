@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import DeleteAlertDialog from "./ui/DeleteAlertDialog";
+import DeleteAlertDialog from "../ui/DeleteAlertDialog";
 import { deletePost } from "@/actions/post.action";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";

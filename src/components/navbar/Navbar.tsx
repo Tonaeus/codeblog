@@ -1,5 +1,5 @@
 import { Bell, Plus } from "lucide-react";
-import CircularButton from "./ui/CircularButton";
+import CircularButton from "../ui/CircularButton";
 import ModeToggle from "./ModeToggle";
 import Link from "next/link";
 import Clerk from "./Clerk";

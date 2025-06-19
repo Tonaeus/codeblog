@@ -1,6 +1,6 @@
 import { getPosts } from "@/actions/post.action";
-import HorizontalDivider from "@/components/HorizontalDivider";
-import PostCard from "@/components/PostCard";
+import HorizontalDivider from "@/components/ui/HorizontalDivider";
+import PostCard from "@/components/post/PostCard";
 import { Post } from "@/types/Post";
 
 const page = async () => {

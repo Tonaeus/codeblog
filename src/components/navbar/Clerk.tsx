@@ -2,7 +2,7 @@
 
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
-import CircularButton from "./ui/CircularButton";
+import CircularButton from "../ui/CircularButton";
 import { User } from "lucide-react";
 import { dark } from "@clerk/themes";
 

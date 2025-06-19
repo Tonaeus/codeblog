@@ -6,9 +6,9 @@ import {
 	isFollowing,
 } from "@/actions/profile.action";
 import { getUserId } from "@/actions/user.action";
-import ActivitiesTabs from "@/components/ActivitiesTabs";
-import FollowButton from "@/components/FollowButton";
-import ProfileCard from "@/components/ProfileCard";
+import ActivitiesTabs from "@/components/profile/ActivitiesTabs";
+import FollowButton from "@/components/profile/FollowButton";
+import ProfileCard from "@/components/profile/ProfileCard";
 import { notFound } from "next/navigation";
 import React from "react";
 

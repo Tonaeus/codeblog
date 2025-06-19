@@ -1,6 +1,6 @@
 import { User } from "@/types/Profile";
 import Link from "next/link";
-import { Avatar, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import FollowButton from "./FollowButton";
 import { getProfile, isFollowing } from "@/actions/profile.action";
 import { getUserId } from "@/actions/user.action";

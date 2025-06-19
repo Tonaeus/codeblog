@@ -1,6 +1,6 @@
 import type { Notification } from "@/types/Notifications";
-import { Button } from "./ui/button";
-import { Avatar, AvatarImage } from "./ui/avatar";
+import { Button } from "../ui/button";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { formatDistanceToNowStrict } from "date-fns/formatDistanceToNowStrict";
 import { format } from "date-fns";
 import Link from "next/link";

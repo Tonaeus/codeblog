@@ -1,6 +1,6 @@
 import { Pencil } from "lucide-react";
-import CircularButton from "./ui/CircularButton";
-import { Avatar, AvatarImage } from "./ui/avatar";
+import CircularButton from "../ui/CircularButton";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { format, formatDistanceToNowStrict } from "date-fns";
 import DeletePostButton from "./DeletePostButton";
 import { Post } from "@/types/Post";

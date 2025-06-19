@@ -3,7 +3,7 @@
 import { Opinion } from "@/types/Opinion";
 
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
-import CircularButton from "./ui/CircularButton";
+import CircularButton from "../ui/CircularButton";
 import numeral from "numeral";
 import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";

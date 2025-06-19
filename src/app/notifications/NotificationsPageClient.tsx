@@ -1,8 +1,8 @@
 "use client";
 
 import type { Notification } from "@/types/Notifications";
-import NotificationCard from "@/components/NotificationCard";
-import HorizontalDivider from "@/components/HorizontalDivider";
+import NotificationCard from "@/components/notif/NotificationCard";
+import HorizontalDivider from "@/components/ui/HorizontalDivider";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 

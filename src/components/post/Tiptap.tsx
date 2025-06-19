@@ -25,7 +25,7 @@ import {
 	UndoIcon,
 } from "lucide-react";
 
-import { Toggle } from "./ui/toggle";
+import { Toggle } from "../ui/toggle";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -33,7 +33,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../ui/dropdown-menu";
 
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 

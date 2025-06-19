@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Follower, Following, Post } from "@/types/Profile";
-import PostCard from "./PostCard";
-import HorizontalDivider from "./HorizontalDivider";
+import PostCard from "../post/PostCard";
+import HorizontalDivider from "../ui/HorizontalDivider";
 import UserCard from "./UserCard";
 
 type ActivitiesTabsProps = {

@@ -1,5 +1,5 @@
 import type { Profile } from "@/types/Profile";
-import { Avatar, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarImage } from "../ui/avatar";
 
 const ProfileCard = ({ profile }: { profile: Profile }) => {
 	return (

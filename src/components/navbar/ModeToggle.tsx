@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import CircularButton from "./ui/CircularButton";
+import CircularButton from "../ui/CircularButton";
 import { Moon, Sun } from "lucide-react";
 
 const ModeToggle = () => {

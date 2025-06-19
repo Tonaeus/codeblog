@@ -1,8 +1,8 @@
 import { getOpinion, getPost } from "@/actions/post.action";
 import sanitizeHtml from "@/utils/sanitizeHtml";
 import { notFound } from "next/navigation";
-import OpinionButtons from "@/components/OpinionButtons";
-import PostMetadata from "@/components/PostMetadata";
+import OpinionButtons from "@/components/post/OpinionButtons";
+import PostMetadata from "@/components/post/PostMetadata";
 import { Opinion } from "@/types/Opinion";
 
 const PostPage = async ({ params }: { params: { postId: string } }) => {

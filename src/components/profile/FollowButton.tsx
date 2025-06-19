@@ -2,7 +2,7 @@
 
 import { Profile } from "@/types/Profile";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Loader2Icon, UserMinus2, UserPlus2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
