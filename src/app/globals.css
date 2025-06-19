@@ -62,7 +62,7 @@
   --color-aa-btn-hv: var(--aa-btn-hv);
 
   --color-op-btn-hl: var(--primary);
-  --color-op-btn-hl-hv: color-mix(in oklch, var(--primary) 90%, black 10%);
+  --color-op-btn-hl-hv: var(--color-op-btn-hl-hv);
 }
 
 :root {
@@ -101,6 +101,8 @@
 
   --aa-btn: color-mix(in oklch, var(--accent) 95%, black 5%);
   --aa-btn-hv: color-mix(in oklch, var(--accent) 90%, black 10%);
+
+  --color-op-btn-hl-hv: #9962FF;
 }
 
 .dark {
@@ -136,7 +138,10 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.541 0.281 293.009);
 
+  --aa-btn: color-mix(in oklch, var(--accent) 95%, black 5%);
   --aa-btn-hv: color-mix(in oklch, var(--accent) 90%, white 10%);
+
+  --color-op-btn-hl-hv: #7320E6;
 }
 
 @layer base {
