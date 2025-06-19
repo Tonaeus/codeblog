@@ -1,8 +1,7 @@
 "use server";
 
-import { Opinion } from "@/types/Opinion";
 import { prisma } from "@/lib/prisma";
-import { getDbUserId } from "./user.action";
+import { getDbUserId, getUserId } from "./user.action";
 import { revalidatePath } from "next/cache";
 
 const createPost = async (title: string, description: string, body: string) => {
@@ -250,7 +249,7 @@ const deletePost = async (postId: string) => {
 
 const getOpinion = async (postId: string) => {
   try {
-    const userId = await getDbUserId();
+    const userId = await getUserId();
 
     if (!userId) {
       return { success: false };
