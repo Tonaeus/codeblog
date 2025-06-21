@@ -6,7 +6,7 @@ const metadata: Metadata = {
 	title: "Codeblog | Notifications",
 };
 
-const NotificationsPage = async () => {
+const NotificationsPageServer = async () => {
 	const { userId, redirectToSignIn } = await auth();
 	if (!userId) {
 		redirectToSignIn();
@@ -17,7 +17,7 @@ const NotificationsPage = async () => {
 	)
 }
 
-export default NotificationsPage;
+export default NotificationsPageServer;
 
 export {
 	metadata
