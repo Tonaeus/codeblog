@@ -5,6 +5,26 @@ import OpinionButtons from "@/components/post/OpinionButtons";
 import PostMetadata from "@/components/post/PostMetadata";
 import { Opinion } from "@/types/Opinion";
 
+const generateMetadata = async ({ params }: { params: { postId: string } }) => {
+  const { postId } = await params;
+	const postResult = await getPost(postId);
+
+	if (!postResult?.success) {
+		return;
+	}
+
+	const post = postResult.post;
+
+	if (!post) {
+		return;
+	}
+
+  return {
+    title: `Codeblog | ${post.title}`,
+    description: `${post.description}`
+  }
+};
+
 const PostPage = async ({ params }: { params: { postId: string } }) => {
 	const { postId } = await params;
 	const postResult = await getPost(postId);
@@ -48,3 +68,7 @@ const PostPage = async ({ params }: { params: { postId: string } }) => {
 };
 
 export default PostPage;
+
+export {
+	generateMetadata
+};

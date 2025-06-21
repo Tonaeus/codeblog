@@ -12,6 +12,13 @@ import ProfileCard from "@/components/profile/ProfileCard";
 import { notFound } from "next/navigation";
 import React from "react";
 
+const generateMetadata = async ({ params }: { params: { username: string } }) => {
+  return {
+    title: `Codeblog | ${params.username}`,
+    description: `Check out ${params.username}'s profile`
+  }
+};
+
 const profilePage = async ({ params }: { params: { username: string } }) => {
 	const { username } = await params;
 	const result = await getProfile(username);
@@ -64,3 +71,7 @@ const profilePage = async ({ params }: { params: { username: string } }) => {
 };
 
 export default profilePage;
+
+export {
+  generateMetadata
+};
