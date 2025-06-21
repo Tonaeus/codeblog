@@ -2,6 +2,12 @@ import { getPosts } from "@/actions/post.action";
 import HorizontalDivider from "@/components/ui/HorizontalDivider";
 import PostCard from "@/components/post/PostCard";
 import { Post } from "@/types/Post";
+import { Metadata } from "next";
+
+const metadata: Metadata = {
+	title: "Codeblog | Home",
+	description: "Explore blog posts on software development topics."
+};
 
 const page = async () => {
 	const result = await getPosts();
@@ -22,3 +28,7 @@ const page = async () => {
 };
 
 export default page;
+
+export {
+	metadata
+}

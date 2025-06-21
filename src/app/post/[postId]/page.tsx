@@ -9,7 +9,6 @@ const PostPage = async ({ params }: { params: { postId: string } }) => {
 	const { postId } = await params;
 	const postResult = await getPost(postId);
 
-	
 	if (!postResult?.success) {
 		notFound();
 	}
