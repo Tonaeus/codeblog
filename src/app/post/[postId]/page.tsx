@@ -50,10 +50,10 @@ const PostPage = async ({ params }: { params: { postId: string } }) => {
           whitespace-normal break-words hyphens-auto
         "
 			>
-				<div className="prose dark:prose-invert max-w-none mb-4">
+				<PostMetadata post={post} />
+				<div className="prose dark:prose-invert max-w-none mt-4">
 					<h1>{post.title}</h1>
 				</div>
-				<PostMetadata post={post} />
 				<div className="my-4" />
 				<div
 					className="prose dark:prose-invert max-w-none mb-8"
