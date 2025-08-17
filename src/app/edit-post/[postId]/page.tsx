@@ -14,7 +14,7 @@ const EditPostPageServer = async ({ params }: { params: { postId: string } }) =>
 		redirectToSignIn();
 	}
 	
-	const { postId } = await params;
+	const { postId } = params;
 	const result = await getEditPost(postId);
 	if (!result?.success) {
 		notFound();

@@ -20,7 +20,7 @@ const generateMetadata = async ({ params }: { params: { username: string } }) =>
 };
 
 const profilePage = async ({ params }: { params: { username: string } }) => {
-	const { username } = await params;
+	const { username } = params;
 	const result = await getProfile(username);
 
 	if (!result?.success || !result.profile) {

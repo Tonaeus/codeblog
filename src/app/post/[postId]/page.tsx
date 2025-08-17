@@ -6,7 +6,7 @@ import PostMetadata from "@/components/post/PostMetadata";
 import { Opinion } from "@/types/Opinion";
 
 const generateMetadata = async ({ params }: { params: { postId: string } }) => {
-  const { postId } = await params;
+  const { postId } = params;
 	const postResult = await getPost(postId);
 
 	if (!postResult?.success) {
@@ -26,7 +26,7 @@ const generateMetadata = async ({ params }: { params: { postId: string } }) => {
 };
 
 const PostPage = async ({ params }: { params: { postId: string } }) => {
-	const { postId } = await params;
+	const { postId } = params;
 	const postResult = await getPost(postId);
 
 	if (!postResult?.success) {
