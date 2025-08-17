@@ -8,13 +8,13 @@ const metadata: Metadata = {
 	title: "Codeblog | Edit Post",
 };
 
-const EditPostPageServer = async ({ params }: { params: { postId: string } }) => {
+const EditPostPageServer = async ({ params }: { params: Promise<{ postId: string }> }) => {
 	const { userId, redirectToSignIn } = await auth();
 	if (!userId) {
 		redirectToSignIn();
 	}
 	
-	const { postId } = params;
+	const { postId } = await params;
 	const result = await getEditPost(postId);
 	if (!result?.success) {
 		notFound();

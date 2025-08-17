@@ -12,15 +12,16 @@ import ProfileCard from "@/components/profile/ProfileCard";
 import { notFound } from "next/navigation";
 import React from "react";
 
-const generateMetadata = async ({ params }: { params: { username: string } }) => {
+const generateMetadata = async ({ params }: { params: Promise<{ username: string }> }) => {
+	const { username } = await params;
   return {
-    title: `Codeblog | ${params.username}`,
-    description: `Check out ${params.username}'s profile`
+    title: `Codeblog | ${username}`,
+    description: `Check out ${username}'s profile`
   }
 };
 
-const profilePage = async ({ params }: { params: { username: string } }) => {
-	const { username } = params;
+const profilePage = async ({ params }: { params: Promise<{ username: string }>}) => {
+	const { username } = await params;
 	const result = await getProfile(username);
 
 	if (!result?.success || !result.profile) {

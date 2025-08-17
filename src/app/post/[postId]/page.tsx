@@ -5,8 +5,8 @@ import OpinionButtons from "@/components/post/OpinionButtons";
 import PostMetadata from "@/components/post/PostMetadata";
 import { Opinion } from "@/types/Opinion";
 
-const generateMetadata = async ({ params }: { params: { postId: string } }) => {
-  const { postId } = params;
+const generateMetadata = async ({ params }: { params: Promise<{ postId: string }> }) => {
+  const { postId } = await params;
 	const postResult = await getPost(postId);
 
 	if (!postResult?.success) {
@@ -25,8 +25,8 @@ const generateMetadata = async ({ params }: { params: { postId: string } }) => {
   }
 };
 
-const PostPage = async ({ params }: { params: { postId: string } }) => {
-	const { postId } = params;
+const PostPage = async ({ params }: { params: Promise<{ postId: string }> }) => {
+	const { postId } = await params;
 	const postResult = await getPost(postId);
 
 	if (!postResult?.success) {
