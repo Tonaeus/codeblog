@@ -38,7 +38,7 @@ const NotificationsPageClient = () => {
 				}
 			} catch (error) {
 				toast.error("Failed to fetch notifications.", {
-					position: "top-center",
+					position: "bottom-center",
 					richColors: true,
 				});
 			}

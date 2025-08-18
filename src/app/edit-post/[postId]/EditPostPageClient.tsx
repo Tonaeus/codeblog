@@ -70,7 +70,7 @@ const EditPostPageClient = ({ post }: { post: EditPost }) => {
 				form.reset();
 				router.push(`/post/${post!.id}`);
 				toast.success("Your post has been edited!", {
-					position: "top-center",
+					position: "bottom-center",
 					richColors: true,
 				});
 			} else {
@@ -79,7 +79,7 @@ const EditPostPageClient = ({ post }: { post: EditPost }) => {
 		} catch (error) {
 			console.error("Failed to edit post", error);
 			toast.error("Failed to edit your post.", {
-				position: "top-center",
+				position: "bottom-center",
 				richColors: true,
 			});
 		} finally {

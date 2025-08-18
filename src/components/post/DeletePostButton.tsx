@@ -30,7 +30,7 @@ const DeletePostButton = ({ postId, btnClassName }: DeletePostButtonProps) => {
 					router.push("/");
 				}
 				toast.success("Your post has been deleted!", {
-					position: "top-center",
+					position: "bottom-center",
 					richColors: true,
 				});
 			} else {
@@ -39,7 +39,7 @@ const DeletePostButton = ({ postId, btnClassName }: DeletePostButtonProps) => {
 		} catch (error) {
 			console.error("Failed to delete post", error);
 			toast.error("Failed to delete your post.", {
-				position: "top-center",
+				position: "bottom-center",
 				richColors: true,
 			});
 		} finally {

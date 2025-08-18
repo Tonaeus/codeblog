@@ -75,7 +75,7 @@ const CreatePostPageClient = () => {
 				form.reset();
 				router.push("/");
 				toast.success("Your post has been created!", {
-					position: "top-center",
+					position: "bottom-center",
 					richColors: true,
 				});
 			} else {
@@ -84,7 +84,7 @@ const CreatePostPageClient = () => {
 		} catch (error) {
 			console.error("Failed to create post", error);
 			toast.error("Failed to create your post.", {
-				position: "top-center",
+				position: "bottom-center",
 				richColors: true,
 			});
 		} finally {

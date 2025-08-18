@@ -65,7 +65,7 @@ const OpinionButtons = ({ post, initialOpinion }: OpinionButtonsProps) => {
 					inputOpinion === Opinion.Positive ? "upvote" : "downvote"
 				}.`,
 				{
-					position: "top-center",
+					position: "bottom-center",
 					richColors: true,
 				}
 			);
