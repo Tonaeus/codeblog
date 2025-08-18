@@ -54,11 +54,12 @@ const PostPage = async ({ params }: { params: Promise<{ postId: string }> }) => 
 				<div className="prose dark:prose-invert max-w-none mt-4">
 					<h1>{post.title}</h1>
 				</div>
-				<div className="my-4" />
+				<div className="h-12" />
 				<div
-					className="prose dark:prose-invert max-w-none mb-8"
+					className="prose dark:prose-invert max-w-none"
 					dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.body ?? "") }}
 				/>
+				<div className="h-12" />
 				<div>
 					<OpinionButtons post={post} initialOpinion={opinion}/>
 				</div>

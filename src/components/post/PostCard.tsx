@@ -14,7 +14,7 @@ const PostCard = async ({ post }: { post: Post }) => {
 			className="
 				group
 				flex flex-col justify-center items-start w-full h-auto
-				px-4 py-2 gap-2
+				px-4 py-2 gap-4
 				rounded-md
 				transition-all hover:bg-accent dark:hover:bg-accent/50
 			"
@@ -26,7 +26,7 @@ const PostCard = async ({ post }: { post: Post }) => {
 			<div className="space-y-2 flex flex-col items-start w-full">
 				<div className="prose-sm dark:prose-invert whitespace-normal break-words hyphens-auto text-left">
 					<Link href={`/post/${post?.id}`} className="hover:text-primary">
-						<h1 className="line-clamp-3">{post?.title}</h1>
+						<h1 className="line-clamp-3 mb-0">{post?.title}</h1>
 					</Link>
 				</div>
 				<div className="prose-sm dark:prose-invert whitespace-normal break-words hyphens-auto text-left">
