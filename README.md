@@ -4,7 +4,7 @@ Codeblog is a web application that lets users write, share, and explore articles
 
 ## Website
 
-Visit the website at [https://codeblog.tonytran.dev/](https://codeblog.tonytran.dev/).
+Visit the website at [https://codeblog.tonytran.dev](https://codeblog.tonytran.dev).
 
 ## Technologies
 
