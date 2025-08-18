@@ -9,10 +9,8 @@ Visit the website at [https://codeblog.tonytran.dev/](https://codeblog.tonytran.
 ## Technologies
 
 **Database**: PostgreSQL  
-**Backend**: Next, Prisma, Clerk, GCP  
-**Frontend**: Next, ShadCN, Tailwind CSS  
-**Deployment**: Vercel, Cloudflare, Neon  
-**Tools**: Ngrok  
+**Backend / Frontend**: Next, Prisma, Clerk, ShadCN, Tailwind CSS  
+**Deployment / Tools**: Vercel, Cloudflare, Neon, GCP, Ngrok  
 
 ## Contact
 
