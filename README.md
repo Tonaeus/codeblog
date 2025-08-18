@@ -11,8 +11,8 @@ Visit the website at [https://codeblog.tonytran.dev/](https://codeblog.tonytran.
 **Database**: PostgreSQL  
 **Backend**: Next, Prisma, Clerk, GCP  
 **Frontend**: Next, ShadCN, Tailwind CSS  
-**Deployment**: Vercel, Cloudflare, Neon
-**Tools**: Ngrok
+**Deployment**: Vercel, Cloudflare, Neon  
+**Tools**: Ngrok  
 
 ## Contact
 
